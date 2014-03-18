@@ -1,19 +1,27 @@
 package gui;
 
 
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class SetupWindow extends JFrame implements MouseListener {
+public class SettingsWindow extends JFrame implements MouseListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public SetupWindow() {
+	public SettingsWindow() {
+		super();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(600, 400);
+		this.setVisible(true);
+		
+		JPanel topPanel = new JPanel(new FlowLayout());
 		
 	}
 

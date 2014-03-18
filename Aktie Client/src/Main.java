@@ -1,4 +1,5 @@
 import gui.ClientWindow;
+import gui.SettingsWindow;
 
 
 public class Main {
@@ -17,7 +18,7 @@ public class Main {
 		}
 		
 		System.out.println("Hello, this is the client");
-		new ClientWindow();
+		new SettingsWindow();
 	}
 
 }
