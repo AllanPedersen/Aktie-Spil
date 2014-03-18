@@ -7,6 +7,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
 
 public class SettingsWindow extends JFrame implements MouseListener {
 
@@ -19,9 +24,32 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(600, 400);
-		this.setVisible(true);
+		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel topPanel = new JPanel(new FlowLayout());
+		FlowLayout fl_topPanel = new FlowLayout();
+		fl_topPanel.setVgap(10);
+		JPanel topPanel = new JPanel(fl_topPanel);
+		topPanel.setBackground(Color.DARK_GRAY);
+		
+		getContentPane().add(topPanel, BorderLayout.NORTH);
+		
+		JLabel lblAktiespilSettings = new JLabel("Aktiespil - Indstillinger");
+		lblAktiespilSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
+		lblAktiespilSettings.setForeground(Color.WHITE);
+		topPanel.add(lblAktiespilSettings);
+		
+		JPanel settingsPanel = new JPanel();
+		getContentPane().add(settingsPanel, BorderLayout.CENTER);
+		settingsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		settingsPanel.add(panel, BorderLayout.SOUTH);
+		
+		JButton btnGem = new JButton("Gem");
+		panel.add(btnGem);
+		
+		
+		this.setVisible(true);
 		
 	}
 
