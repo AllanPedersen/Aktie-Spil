@@ -1,4 +1,3 @@
-import gui.ClientWindow;
 import gui.SettingsWindow;
 
 

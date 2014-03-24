@@ -7,10 +7,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -24,11 +29,12 @@ public class SettingsWindow extends JFrame implements MouseListener {
 	private JTextField portTextField;
 	private JTextField nameTextField;
 	private JTextField emailTextField;
+	private JButton btnGem;
 	
 	public SettingsWindow() {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(550, 300);
+		this.setSize(550, 315);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		FlowLayout fl_topPanel = new FlowLayout();
@@ -83,18 +89,57 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		emailTextField.setBounds(169, 123, 324, 28);
 		settingsPanel.add(emailTextField);
 		
-		JButton btnGem = new JButton("Gem");
-		btnGem.setBounds(240, 182, 75, 29);
+		btnGem = new JButton("Gem");
+		btnGem.addMouseListener(this);
+		btnGem.setBounds(240, 186, 75, 29);
 		settingsPanel.add(btnGem);
 		
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+	
+	/**
+	 * This method returns the values of the text-fields when called
+	 * @return An ArrayList of strings that contain the information specified in the fields
+	 */
+	public ArrayList<String> getSettings() {
+		ArrayList<String> settings = new ArrayList<String>();
 		
+		settings.add(this.ipTextField.getText());
+		settings.add(this.portTextField.getText());
+		settings.add(this.nameTextField.getText());
+		settings.add(this.emailTextField.getText());
+		
+		return settings;
+	}
+	
+	public void setFieldsNotValid(ArrayList<String> fields) {
+		for (String field : fields) {
+			switch (field) {
+			case "ip":
+				this.ipTextField.setForeground(Color.RED);
+				break;
+			case "port":
+				this.portTextField.setForeground(Color.RED);
+				break;
+			case "navn":
+				this.nameTextField.setForeground(Color.RED);
+				break;
+			case "email":
+				this.emailTextField.setForeground(Color.RED);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == btnGem) {
+			System.out.println("Gem clicked");
+			System.out.println(this.getSettings().toString());
+		}
 	}
 
 	@Override
