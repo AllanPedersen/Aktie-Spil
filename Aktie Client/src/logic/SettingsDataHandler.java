@@ -24,7 +24,7 @@ public class SettingsDataHandler
 	private String storedData;
 	private String temporaryData;
 	private String windowsUsername;
-	private String tempString1;
+
 	/**
 	 * takes notice if firstly the folder exists, and secondly the settings.txt
 	 * if none exists then creates both.

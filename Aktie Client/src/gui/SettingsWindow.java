@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import logic.SettingsDataHandler;
+
 public class SettingsWindow extends JFrame implements MouseListener {
 
 	/**
@@ -109,7 +111,8 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		settings.add(this.portTextField.getText());
 		settings.add(this.nameTextField.getText());
 		settings.add(this.emailTextField.getText());
-		
+		SettingsDataHandler sdh = new SettingsDataHandler();
+		sdh.writeNewSettings(settings);
 		return settings;
 	}
 	
