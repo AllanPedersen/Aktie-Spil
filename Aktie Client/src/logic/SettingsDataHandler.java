@@ -68,6 +68,24 @@ public class SettingsDataHandler
 			}
 		}
 	}
+	
+	public static boolean settingsExists() {
+		String storedData;
+		if (Main.IS_MAC) {
+			String username = System.getProperty("user.home");
+			storedData = username +"/Applications/Aktie Client/settings.txt";
+		} else {
+			String username = System.getProperty("user.name");
+			storedData = "c:\\users\\" + username + "\\appData\\local\\Aktie Client\\settings.txt";
+		}
+		
+		if (new File(storedData).exists()) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 
 
 
