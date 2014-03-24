@@ -8,10 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
-
 
 
 /**
@@ -23,7 +20,7 @@ public class SettingsDataHandler
 {
 	private String storedData;
 	private String temporaryData;
-	private String windowsUsername;
+	private String username;
 
 	/**
 	 * takes notice if firstly the folder exists, and secondly the settings.txt
@@ -31,25 +28,49 @@ public class SettingsDataHandler
 	 */
 	public SettingsDataHandler()
 	{
-		this.windowsUsername = System.getProperty("user.name");
-		File directory = new File("c:\\users\\" + windowsUsername + "\\appData\\local\\Aktie Client");
+		/**
+		 * If not mac, use these settings
+		 */
+		if (!Main.IS_MAC) {
+			this.username = System.getProperty("user.name");
+			File directory = new File("c:\\users\\" + username + "\\appData\\local\\Aktie Client");
 
-		  // if the directory does not exist, create it
-		if (!directory.exists()) 
-		{  directory.mkdir(); 
-		}
+			// if the directory does not exist, create it
+			if (!directory.exists()) 
+			{  directory.mkdir(); 
+			}
 
-		this.storedData = "c:\\users\\" + windowsUsername + "\\appData\\local\\Aktie Client\\settings.txt";
-		this.temporaryData = "c:\\users\\" + windowsUsername + "\\appData\\local\\Aktie Client\\settings2.txt";
-		
-		if(!new File(storedData).exists())
-		{
-		   createNewFile();
+			this.storedData = "c:\\users\\" + username + "\\appData\\local\\Aktie Client\\settings.txt";
+			this.temporaryData = "c:\\users\\" + username + "\\appData\\local\\Aktie Client\\settings2.txt";
+
+			if(!new File(storedData).exists())
+			{
+				createNewFile();
+			}
+		/**
+		 * If Mac use these settings
+		 */
+		} else {
+			this.username = System.getProperty("user.home");
+			File directory = new File(this.username +"/Applications/Aktie Client");
+
+			// if the directory does not exist, create it
+			if (!directory.exists()) 
+			{  directory.mkdir(); 
+			}
+
+			this.storedData = this.username +"/Applications/Aktie Client/settings.txt";
+			this.temporaryData = this.username +"/Applications/Aktie Client/settings2.txt";
+
+			if(!new File(storedData).exists())
+			{
+				createNewFile();
+			}
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Uses a bufferedReader to get all the data in a text document, then returns it as an Arraylist
 	 * @return
@@ -59,24 +80,24 @@ public class SettingsDataHandler
 		String line;
 		ArrayList<String> temp = new ArrayList<String>(); //creates and ArrayList to store the users
 		BufferedReader reader;
-		    try{       
-		        reader = new BufferedReader(new FileReader(storedData));
-		        while((line = reader.readLine()) != null) 
-		        {
-		           String tempString = "";
-		           tempString = line.substring(line.lastIndexOf(","+1));     
-		           temp.add(tempString);
-		        }
-		        reader.close();
-		     }
-		    catch(IOException e){
-		        JOptionPane.showMessageDialog(null, "Error");
-		e.printStackTrace();
-		    }
-		    return temp;
+		try{       
+			reader = new BufferedReader(new FileReader(storedData));
+			while((line = reader.readLine()) != null) 
+			{
+				String tempString = "";
+				tempString = line.substring(line.lastIndexOf(","+1));     
+				temp.add(tempString);
+			}
+			reader.close();
+		}
+		catch(IOException e){
+			JOptionPane.showMessageDialog(null, "Error");
+			e.printStackTrace();
+		}
+		return temp;
 	}
-	
-	
+
+
 	/**
 	 * creates a new blank file to be used in case the program is newly installed or the old one is deleted.
 	 */
@@ -84,52 +105,52 @@ public class SettingsDataHandler
 	{
 		File f = new File(this.storedData);
 		try {
-			   BufferedWriter writer;
-			  f.createNewFile();
-			  writer = new BufferedWriter(new FileWriter(f));
-			  writer.append("ip,");
-			  writer.newLine();
-			  writer.append("port,");
-			  writer.newLine();
-			  writer.append("navn,");
-			  writer.newLine();
-			  writer.append("email,");
-			  writer.newLine();
-			  writer.close();
-			  
+			BufferedWriter writer;
+			f.createNewFile();
+			writer = new BufferedWriter(new FileWriter(f));
+			writer.append("ip,");
+			writer.newLine();
+			writer.append("port,");
+			writer.newLine();
+			writer.append("navn,");
+			writer.newLine();
+			writer.append("email,");
+			writer.newLine();
+			writer.close();
+
 		} catch (IOException e) {
-		 	e.printStackTrace();
-	    	}	
+			e.printStackTrace();
+		}	
 	}
-	
+
 	public void writeNewSettings(ArrayList<String> newList)
 	{
 		BufferedWriter writer;
 		File tempFile = new File(this.temporaryData); 
-		    try{       
-		        writer = new BufferedWriter(new FileWriter(tempFile));
-		        writer.append("ip,"+newList.get(0));
-		        writer.newLine();
-		        writer.append("port,"+newList.get(1));
-		        writer.newLine();
-		        writer.append("navn,"+newList.get(2));
-		        writer.newLine();
-		        writer.append("email,"+newList.get(3));
-		        writer.newLine();
-		        writer.close();
-		    }
-		    catch(IOException e){
-		        JOptionPane.showMessageDialog(null, "Error");
-		e.printStackTrace();
-		    }
-		    File oldFile = new File(this.storedData); //gets the old file
-		    oldFile.delete(); //deletes the old file
-		    tempFile.renameTo(oldFile); //rename new file to old file
+		try{       
+			writer = new BufferedWriter(new FileWriter(tempFile));
+			writer.append("ip,"+newList.get(0));
+			writer.newLine();
+			writer.append("port,"+newList.get(1));
+			writer.newLine();
+			writer.append("navn,"+newList.get(2));
+			writer.newLine();
+			writer.append("email,"+newList.get(3));
+			writer.newLine();
+			writer.close();
+		}
+		catch(IOException e){
+			JOptionPane.showMessageDialog(null, "Error");
+			e.printStackTrace();
+		}
+		File oldFile = new File(this.storedData); //gets the old file
+		oldFile.delete(); //deletes the old file
+		tempFile.renameTo(oldFile); //rename new file to old file
 	}
 
-	public String getWindowsUsername()
-	{
-		return windowsUsername;
-	}
+	//	public String getWindowsUsername()
+	//	{
+	//		return windowsUsername;
+	//	}
 }
 

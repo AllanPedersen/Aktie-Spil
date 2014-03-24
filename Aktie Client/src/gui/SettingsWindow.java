@@ -142,6 +142,7 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		if (e.getSource() == btnGem) {
 			System.out.println("Gem clicked");
 			System.out.println(this.getSettings().toString());
+			this.dispose();
 		}
 	}
 

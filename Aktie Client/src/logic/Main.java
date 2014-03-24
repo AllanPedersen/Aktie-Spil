@@ -1,10 +1,11 @@
+package logic;
 import gui.SettingsWindow;
 
 
 public class Main {
 	
 	private static String lcOSName = System.getProperty("os.name").toLowerCase();
-	private static boolean IS_MAC = lcOSName.startsWith("mac os x");
+	public static boolean IS_MAC = lcOSName.startsWith("mac os x");
 
 	public static void main(String[] args) {
 		// Mac specific tasks
