@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class SettingsWindow extends JFrame implements MouseListener {
 
@@ -19,11 +20,15 @@ public class SettingsWindow extends JFrame implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JTextField ipTextField;
+	private JTextField portTextField;
+	private JTextField nameTextField;
+	private JTextField emailTextField;
 	
 	public SettingsWindow() {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 400);
+		this.setSize(550, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		FlowLayout fl_topPanel = new FlowLayout();
@@ -40,13 +45,47 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		
 		JPanel settingsPanel = new JPanel();
 		getContentPane().add(settingsPanel, BorderLayout.CENTER);
-		settingsPanel.setLayout(new BorderLayout(0, 0));
+		settingsPanel.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		settingsPanel.add(panel, BorderLayout.SOUTH);
+		JLabel lblServerIp = new JLabel("Server IP:");
+		lblServerIp.setBounds(58, 45, 115, 16);
+		settingsPanel.add(lblServerIp);
+		
+		JLabel lblServerPort = new JLabel("Server Port:");
+		lblServerPort.setBounds(58, 73, 115, 16);
+		settingsPanel.add(lblServerPort);
+		
+		JLabel lblName = new JLabel("Name:");
+		lblName.setBounds(58, 101, 115, 16);
+		settingsPanel.add(lblName);
+		
+		JLabel lblEmail = new JLabel("E-mail:");
+		lblEmail.setBounds(58, 129, 115, 16);
+		settingsPanel.add(lblEmail);
+		
+		ipTextField = new JTextField();
+		ipTextField.setBounds(169, 39, 324, 28);
+		settingsPanel.add(ipTextField);
+		ipTextField.setColumns(10);
+		
+		portTextField = new JTextField();
+		portTextField.setColumns(10);
+		portTextField.setBounds(169, 67, 324, 28);
+		settingsPanel.add(portTextField);
+		
+		nameTextField = new JTextField();
+		nameTextField.setColumns(10);
+		nameTextField.setBounds(169, 95, 324, 28);
+		settingsPanel.add(nameTextField);
+		
+		emailTextField = new JTextField();
+		emailTextField.setColumns(10);
+		emailTextField.setBounds(169, 123, 324, 28);
+		settingsPanel.add(emailTextField);
 		
 		JButton btnGem = new JButton("Gem");
-		panel.add(btnGem);
+		btnGem.setBounds(240, 182, 75, 29);
+		settingsPanel.add(btnGem);
 		
 		this.setResizable(false);
 		this.setVisible(true);
@@ -73,5 +112,4 @@ public class SettingsWindow extends JFrame implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
-
 }
