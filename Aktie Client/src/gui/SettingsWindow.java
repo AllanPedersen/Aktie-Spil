@@ -48,7 +48,7 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		JButton btnGem = new JButton("Gem");
 		panel.add(btnGem);
 		
-		
+		this.setResizable(false);
 		this.setVisible(true);
 		
 	}
