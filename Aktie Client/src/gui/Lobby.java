@@ -44,7 +44,7 @@ public class Lobby extends JPanel implements MouseListener {
 		lblVelkommen.setBounds(16, 16, 114, 22);
 		add(lblVelkommen);
 		
-		lblPlayerName = new JLabel("Chris den onde ged");
+		lblPlayerName = new JLabel();
 		lblPlayerName.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		lblPlayerName.setBounds(131, 16, 391, 22);
 		add(lblPlayerName);
@@ -138,43 +138,43 @@ public class Lobby extends JPanel implements MouseListener {
 		pos10.setBounds(547, 353, 29, 16);
 		add(pos10);
 		
-		high1 = new JLabel("Chris den onde ged");
+		high1 = new JLabel();
 		high1.setBounds(588, 101, 189, 16);
 		add(high1);
 		
-		high2 = new JLabel("Pjerret fra Barken");
+		high2 = new JLabel();
 		high2.setBounds(588, 129, 189, 16);
 		add(high2);
 		
-		high3 = new JLabel("Den super onde Mads");
+		high3 = new JLabel();
 		high3.setBounds(588, 157, 189, 16);
 		add(high3);
 		
-		high4 = new JLabel("Smugleren fra Sams\u00F8");
+		high4 = new JLabel();
 		high4.setBounds(588, 185, 189, 16);
 		add(high4);
 		
-		high5 = new JLabel("Allan den gode gud");
+		high5 = new JLabel();
 		high5.setBounds(588, 213, 189, 16);
 		add(high5);
 		
-		high6 = new JLabel("Russeren fra Krim");
+		high6 = new JLabel();
 		high6.setBounds(588, 241, 189, 16);
 		add(high6);
 		
-		high7 = new JLabel("Polle fra Snave");
+		high7 = new JLabel();
 		high7.setBounds(588, 269, 189, 16);
 		add(high7);
 		
-		high8 = new JLabel("Det sidste monster Mogens");
+		high8 = new JLabel();
 		high8.setBounds(588, 297, 189, 16);
 		add(high8);
 		
-		high9 = new JLabel("Rune den store gnom");
+		high9 = new JLabel();
 		high9.setBounds(588, 325, 189, 16);
 		add(high9);
 		
-		high10 = new JLabel("The best ever");
+		high10 = new JLabel();
 		high10.setBounds(588, 353, 189, 16);
 		add(high10);
 	}
@@ -216,34 +216,34 @@ public class Lobby extends JPanel implements MouseListener {
 		
 		for (int x = 0; x < loop; x++) {
 			switch (x) {
-			case 1:
+			case 0:
 				high1.setText(highscores.get(x));
 				break;
-			case 2:
+			case 1:
 				high2.setText(highscores.get(x));
 				break;
-			case 3:
+			case 2:
 				high3.setText(highscores.get(x));
 				break;
-			case 4:
+			case 3:
 				high4.setText(highscores.get(x));
 				break;
-			case 5:
+			case 4:
 				high5.setText(highscores.get(x));
 				break;
-			case 6:
+			case 5:
 				high6.setText(highscores.get(x));
 				break;
-			case 7:
+			case 6:
 				high7.setText(highscores.get(x));
 				break;
-			case 8:
+			case 7:
 				high8.setText(highscores.get(x));
 				break;
-			case 9:
+			case 8:
 				high9.setText(highscores.get(x));
 				break;
-			case 10:
+			case 9:
 				high10.setText(highscores.get(x));
 				break;
 			default:

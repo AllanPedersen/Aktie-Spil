@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class ClientWindow extends JFrame {
 	
@@ -23,22 +24,37 @@ public class ClientWindow extends JFrame {
 		super();
 		this.setTitle("Aktiespil");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800, 600);		
+		this.setSize(800, 600);
 		
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		Lobby lobby = new Lobby();
+		
+		// Test highscore array. Will be replaced with server content.
+		// TODO: Replace with server content
+		ArrayList<String> highscores = new ArrayList<String>();
+		highscores.add("Chris");
+		highscores.add("Allan");
+		highscores.add("Peter");
+		highscores.add("Mads");
+		highscores.add("Maria");
+		
+		lobby.setHighScores(highscores);
+		lobby.setServerStatus(1);
+		lobby.setUsername("Chris the master of all");
 
 		cl = new CardLayout();
 		cards = new JPanel(cl);
-		cards.add(new Lobby(), "Lobby");
+		cards.add(lobby, "Lobby");
 		
 		contentPane.add(cards);
 		
 		// Show the default layout
 		cl.show(cards, "Lobby");
 		
-		
+		// Lock window size and set visible
 		this.setResizable(false);
 		this.setVisible(true);
 	}
