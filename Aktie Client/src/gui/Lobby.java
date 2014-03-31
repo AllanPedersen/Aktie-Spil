@@ -256,7 +256,6 @@ public class Lobby extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == invitePanel) {
 			// TODO: Create real action
-			JOptionPane.showConfirmDialog(this, "Invitation sendt");
 		}
 	}
 

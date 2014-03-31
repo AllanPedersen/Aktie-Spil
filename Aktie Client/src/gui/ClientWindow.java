@@ -19,6 +19,8 @@ public class ClientWindow extends JFrame {
 	private static CardLayout cl;
 	public static Color green = new Color(183, 210, 120);
 	public static Color hoverGreen = new Color(212, 250, 125);
+	public static Color red = new Color(254, 99, 99);
+	public static Color hoverRed = new Color(241, 145, 145);
 
 	public ClientWindow() {
 		super();
@@ -62,6 +64,10 @@ public class ClientWindow extends JFrame {
 	public static void changeLayout(String layout) {
 		// TODO: Check if specified layout exists
 		// TODO: Change layout or throw exception
+	}
+	
+	public static void invite(String name, String time, String money) {
+		new InviteWindow(name, time, money);
 	}
 
 }
