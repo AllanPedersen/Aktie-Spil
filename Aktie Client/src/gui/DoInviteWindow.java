@@ -14,10 +14,13 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class DoInviteWindow extends JFrame implements MouseListener{
+public class DoInviteWindow extends JFrame implements MouseListener, WindowListener {
 
 	/**
 	 * 
@@ -33,6 +36,7 @@ public class DoInviteWindow extends JFrame implements MouseListener{
 	 */
 	public DoInviteWindow() {
 		super();
+		this.addWindowListener(this);
 		setResizable(false);
 		setSize(450, 322);
 		setLocationRelativeTo(null);
@@ -79,8 +83,8 @@ public class DoInviteWindow extends JFrame implements MouseListener{
 		lblLngdeAfSpil.setBounds(17, 60, 115, 16);
 		panel_1.add(lblLngdeAfSpil);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"20 min", "30 min", "1 time", "2 timer", "5 timer"}));
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"20 min", "30 min", "1 time", "2 timer", "5 timer"}));
 		comboBox.setBounds(17, 81, 415, 27);
 		panel_1.add(comboBox);
 		
@@ -88,8 +92,8 @@ public class DoInviteWindow extends JFrame implements MouseListener{
 		lblStartKapital.setBounds(17, 120, 115, 16);
 		panel_1.add(lblStartKapital);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"10.000", "100.000", "500.000", "1.000.000", "5.000.000"}));
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"10.000", "100.000", "500.000", "1.000.000", "5.000.000"}));
 		comboBox_1.setSelectedIndex(2);
 		comboBox_1.setBounds(17, 141, 415, 27);
 		panel_1.add(comboBox_1);
@@ -134,5 +138,35 @@ public class DoInviteWindow extends JFrame implements MouseListener{
 				btnInvite.setBackground(ClientWindow.green);
 			}
 		}
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Cancel invite
+		System.out.println("CANCEL INVITE");
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
 	}
 }
