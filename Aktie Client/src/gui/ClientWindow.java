@@ -66,9 +66,6 @@ public class ClientWindow extends JFrame {
 		// TODO: Check if specified layout exists
 		// TODO: Change layout or throw exception
 	}
-	
-	public static void invite(String name, String time, String money) {
-		new InviteWindow(name, time, money);
-	}
+
 
 }
