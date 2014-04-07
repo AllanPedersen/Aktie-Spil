@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import logic.Player;
+
 public class ClientWindow extends JFrame {
 	
 	/**
@@ -46,7 +48,18 @@ public class ClientWindow extends JFrame {
 		
 		lobby.setHighScores(highscores);
 		lobby.setServerStatus(1);
-		lobby.setUsername("Chris the master of all");
+		lobby.setUsername("Chris den onde ged");
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player play1 = new Player("Allan", "a@a.dk", "127.0.0.1", 23000);
+		Player play2 = new Player("Mads", "a@a.dk", "127.0.0.1", 23000);
+		Player play3 = new Player("Rune", "a@a.dk", "127.0.0.1", 23000);
+		
+		players.add(play1);
+		players.add(play2);
+		players.add(play3);
+		
+		lobby.setPlayerList(players);
 
 		cl = new CardLayout();
 		cards = new JPanel(cl);

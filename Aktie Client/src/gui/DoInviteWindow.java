@@ -20,6 +20,8 @@ import java.awt.event.WindowListener;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import logic.Player;
+
 public class DoInviteWindow extends JFrame implements MouseListener, WindowListener {
 
 	/**
@@ -30,12 +32,15 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	private JPanel btnInvite;
 	private JLabel lblInviterSpilelr;
 	private boolean waiting = false;
+	private JLabel lblPlayer;
+	private Player player;
 
 	/**
 	 * Create the frame.
 	 */
-	public DoInviteWindow() {
+	public DoInviteWindow(Player player) {
 		super();
+		this.player = player;
 		this.addWindowListener(this);
 		setResizable(false);
 		setSize(450, 322);
@@ -74,10 +79,10 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 		lblSendInvitationTil.setBounds(17, 17, 115, 16);
 		panel_1.add(lblSendInvitationTil);
 		
-		JLabel lblDenOndeGed = new JLabel("Den onde ged Chris");
-		lblDenOndeGed.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblDenOndeGed.setBounds(144, 17, 288, 16);
-		panel_1.add(lblDenOndeGed);
+		lblPlayer = new JLabel(this.player.getName());
+		lblPlayer.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblPlayer.setBounds(144, 17, 288, 16);
+		panel_1.add(lblPlayer);
 		
 		JLabel lblLngdeAfSpil = new JLabel("L\u00E6ngde af spil:");
 		lblLngdeAfSpil.setBounds(17, 60, 115, 16);

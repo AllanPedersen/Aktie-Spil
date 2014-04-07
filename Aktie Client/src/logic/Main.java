@@ -16,7 +16,6 @@ public class Main {
 		if (SettingsDataHandler.settingsExists()) {
 			// Create connection to server, if succes open lobby, otherwise open settings
 			Main.openLobby();
-			Main.invite("Allan", "1 time", "500.000");
 		} else {
 			new SettingsWindow();
 		}

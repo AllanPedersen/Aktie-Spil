@@ -2,23 +2,21 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Color;
-
 import javax.swing.border.EmptyBorder;
-
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
+
+import logic.Player;
 
 public class Lobby extends JPanel implements MouseListener {
 
@@ -31,6 +29,8 @@ public class Lobby extends JPanel implements MouseListener {
 	private JLabel lblPlayerName;
 	private JLabel high1, high2, high3, high4, high5, high6, high7, high8, high9, high10;
 	private JList<String> playerList;
+	private static DefaultListModel<String> listModel;
+	private ArrayList<Player> players;
 
 	/**
 	 * Create the panel.
@@ -72,20 +72,11 @@ public class Lobby extends JPanel implements MouseListener {
 		scrollPane.setBounds(16, 86, 506, 424);
 		add(scrollPane);
 		
+		listModel = new DefaultListModel<String>();
+		
 		playerList = new JList<String>();
-		playerList.setModel(new AbstractListModel<String>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			String[] values = new String[] {"Allan den gode gud", "Rasmus den lille tykke gris", "Peter med det store hoved", "Yvonne den lille julemus", "Marius den d\u00F8de giraf"};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
+		playerList.setModel(listModel);
+		
 		playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(playerList);
 		
@@ -198,6 +189,21 @@ public class Lobby extends JPanel implements MouseListener {
 	}
 	
 	/**
+	 * This method sets the list of available players from an array list of players
+	 * @param players
+	 */
+	public void setPlayerList(ArrayList<Player> players) {
+		this.players = players;
+		
+		listModel.removeAllElements();
+		
+		for (Player player : players) {
+			listModel.addElement(player.toString());
+		}
+			
+	}
+	
+	/**
 	 * This method sets the username
 	 * @param username
 	 */
@@ -257,9 +263,8 @@ public class Lobby extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == invitePanel) {
 			if (playerList.getSelectedIndex() >= 0) {
-				
-				new DoInviteWindow();
-				// TODO: Create real action
+				Player player = this.players.get(playerList.getSelectedIndex());
+				new DoInviteWindow(player);
 			} else {
 				JOptionPane.showMessageDialog(this, "Select a player first");
 			}
