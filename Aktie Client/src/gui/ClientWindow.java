@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import logic.Player;
+import logic.SettingsDataHandler;
 
 public class ClientWindow extends JFrame {
 	
@@ -46,9 +47,17 @@ public class ClientWindow extends JFrame {
 		highscores.add("Mads");
 		highscores.add("Maria");
 		
+		SettingsDataHandler sdh = new SettingsDataHandler();
+		ArrayList<String> settings = new ArrayList<String>();
+		settings = sdh.getSettings();
+		
+		for (String string : settings) {
+			System.out.println(string);
+		}
+		
 		lobby.setHighScores(highscores);
 		lobby.setServerStatus(1);
-		lobby.setUsername("Chris den onde ged");
+		//lobby.setUsername(setttings.get(2));
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player play1 = new Player("Allan", "a@a.dk", "127.0.0.1", 23000);

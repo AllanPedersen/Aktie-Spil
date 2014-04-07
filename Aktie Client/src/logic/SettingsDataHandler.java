@@ -94,7 +94,7 @@ public class SettingsDataHandler
 	 * @return
 	 */
 	public ArrayList<String> getSettings()
-	{
+	{	
 		String line;
 		ArrayList<String> temp = new ArrayList<String>(); //creates and ArrayList to store the users
 		BufferedReader reader;
