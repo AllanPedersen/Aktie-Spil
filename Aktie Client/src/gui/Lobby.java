@@ -2,19 +2,14 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Color;
-
 import javax.swing.border.EmptyBorder;
-
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
@@ -255,6 +250,7 @@ public class Lobby extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == invitePanel) {
+			new DoInviteWindow();
 			// TODO: Create real action
 		}
 	}

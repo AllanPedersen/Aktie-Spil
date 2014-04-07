@@ -29,6 +29,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		super();
 		this.setResizable(false);
 		this.setSize(444, 266);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
