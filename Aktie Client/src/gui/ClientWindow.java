@@ -51,13 +51,9 @@ public class ClientWindow extends JFrame {
 		ArrayList<String> settings = new ArrayList<String>();
 		settings = sdh.getSettings();
 		
-		for (String string : settings) {
-			System.out.println(string);
-		}
-		
 		lobby.setHighScores(highscores);
 		lobby.setServerStatus(1);
-		//lobby.setUsername(setttings.get(2));
+		lobby.setUsername(settings.get(2));
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player play1 = new Player("Allan", "a@a.dk", "127.0.0.1", 23000);
