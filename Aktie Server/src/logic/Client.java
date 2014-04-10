@@ -43,8 +43,8 @@ public class Client implements Runnable {
 		   this.ip = divideChatString[2];
 		   this.port = divideChatString[3];
 		   this.email = divideChatString[4];
-		   udh.countUsers(); //used to update on server how many active users there are.
-           udh.updateUserList();
+		   udh.countUsers(); //used to update on server how many active players there are.
+           udh.updateUserList(); //sends a new list of active users to all connected players
 		}
 	   
 
