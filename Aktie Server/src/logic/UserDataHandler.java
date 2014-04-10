@@ -1,6 +1,10 @@
 package logic;
 
+import gui.ServerWindow;
+
 import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
 
 public class UserDataHandler
 {
@@ -11,13 +15,24 @@ public class UserDataHandler
 	 //this is used in order to prevent several threads attempting to use the same code at the same time
 	 private final Object lock = new Object();
 	
-	 
+	 /**
+	  * Counts active users and updates the gui.
+	  * to keep the project threadsafe, we need to add the changing of the GUI
+	  * to the 'EDT, Event Dispatcher Thread' (Gui Thread)
+	  */
 	 public void countUsers() 
-	{
-		// TODO Auto-generated method stub
+	 {
 		 synchronized(lock) //Threads wanting to work with the method needs to take their turn untill this lock is released
-		  {
-		  
+		 {
+			 
+		   SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+		
+				Main.serverWindow.updateActivePlayers(playerList.size());
+			}
+		});
 		  }
 	}
 

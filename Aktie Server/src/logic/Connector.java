@@ -29,6 +29,7 @@ public class Connector implements Runnable
 	 */
 	public Connector(int port)
 	{
+		System.out.println("you got here");
       this.udh = new UserDataHandler(); //creates the instance of UDH
       this.port = port;
       
@@ -50,6 +51,9 @@ public class Connector implements Runnable
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		
+		
+		
 		
 		changeStatus(); //changes boolean to true, and as such allows the while loop
 		while(status)
