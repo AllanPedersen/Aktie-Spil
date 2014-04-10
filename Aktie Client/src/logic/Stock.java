@@ -4,6 +4,7 @@ public class Stock {
 	
 	private String name;
 	private double value;
+	private int bankAmount = 0;
 	
 	public Stock(String name, double value) {
 		this.setName(name);
@@ -53,5 +54,13 @@ public class Stock {
 		} else {
 			return false;
 		}
+	}
+	
+	public int getBankAmount() {
+		return this.bankAmount;
+	}
+	
+	public void setBankAmount(int amount) {
+		this.bankAmount = amount;
 	}
 }

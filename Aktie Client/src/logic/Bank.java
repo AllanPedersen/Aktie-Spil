@@ -6,6 +6,7 @@ public class Bank {
 	
 	private double amount;
 	private ArrayList<Stock> stocks = new ArrayList<Stock>();
+	// TODO: Add fee for buying stocks
 	
 	public Bank(double amount) {
 		this.amount = amount;
@@ -16,26 +17,73 @@ public class Bank {
 	}
 	
 	/**
-	 * 
+	 * This method is used to buy stocks.
 	 * @param stock The stock the user wants to buy
 	 * @param amount The amount of the stock the user wants to buy
 	 * @return A boolean, true if succeeded, false if the bank doesn't have enough money
 	 */
 	public boolean buyStock(Stock stock, int amount) {
+		if (amount < 0) {
+			System.out.println("LOG: Tried to buy negative number of stocks: amount = " + amount);
+			return false;
+		}
 		
+		double totalCost = stock.getValue() * amount;
 		
-		return true;
+		if (this.getAmount() >= totalCost) {
+			// TODO Check if stock already exists, then add to existing.
+			
+			
+			// Buy stocks
+			stock.setBankAmount(amount);
+			this.stocks.add(stock);
+			
+			// Update bank amount
+			this.amount = this.amount - totalCost;
+			
+			System.out.println("LOG: Bought " + amount + " of stock for a combined value of: " + totalCost);
+			return true;
+		} else {
+			System.out.println("LOG: Total cost of stocks exceed amount in bank: bank = " + this.amount);
+			return false;
+		}
+		
 	}
 	
 	/**
-	 * 
+	 * This method sells stock
 	 * @param stock The stock the user wants to sell
 	 * @param amount The amount of the stock the user wants to sell
 	 * @return
 	 */
 	public boolean sellStock(Stock stock, int amount) {
+		if (!bankContainsStock(stock)) return false;
 		
-		return true;
+		for (Stock st : stocks) {
+			if (st.equals(stock)) {
+				// Check if amount is less than or equal to what we have.
+				if (st.getBankAmount() <= amount) {
+					// Update stock value
+					st.updateValue();
+					
+					// Calculate 
+					double val = st.getValue() * amount;
+					
+					// Update bank amount
+					this.amount = this.amount + val;
+					
+					// Remove stocks from list
+					st.setBankAmount(st.getBankAmount() - amount);
+				} else {
+					return false;
+				}
+				
+				// No need to loop any more..	
+				break;
+			}
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -44,8 +92,12 @@ public class Bank {
 	 * @return True if the bank contains stock of that type, false otherwise
 	 */
 	public boolean bankContainsStock(Stock stock) {
+		
+		for (Stock st : stocks) {
+			if (st.equals(stock)) return true;
+		}
 	
-		return true;
+		return false;
 	}
 	
 	/**
