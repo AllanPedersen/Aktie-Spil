@@ -47,9 +47,9 @@ public class SettingsDataHandler
 			{
 				createNewFile();
 			}
-		/**
-		 * If Mac use these settings
-		 */
+			/**
+			 * If Mac use these settings
+			 */
 		} else {
 			this.username = System.getProperty("user.home");
 			File directory = new File(this.username +"/Applications/Aktie Client");
@@ -68,7 +68,7 @@ public class SettingsDataHandler
 			}
 		}
 	}
-	
+
 	public static boolean settingsExists() {
 		String storedData;
 		if (Main.IS_MAC) {
@@ -78,13 +78,13 @@ public class SettingsDataHandler
 			String username = System.getProperty("user.name");
 			storedData = "c:\\users\\" + username + "\\appData\\local\\Aktie Client\\settings.txt";
 		}
-		
+
 		if (new File(storedData).exists()) {
 			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
 
 
@@ -102,9 +102,7 @@ public class SettingsDataHandler
 			reader = new BufferedReader(new FileReader(storedData));
 			while((line = reader.readLine()) != null) 
 			{
-				String tempString = "";
-				tempString = line.substring(line.lastIndexOf(","+1));     
-				temp.add(tempString);
+				temp.add(line.substring((line.lastIndexOf(',') +1), line.length()));
 			}
 			reader.close();
 		}
