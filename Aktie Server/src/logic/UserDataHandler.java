@@ -1,6 +1,5 @@
 package logic;
 
-import gui.ServerWindow;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class UserDataHandler
 	  */
 	 public void countUsers() 
 	 {
-		 synchronized(lock) //Threads wanting to work with the method needs to take their turn untill this lock is released
+		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
 		 {
 			 
 		   SwingUtilities.invokeLater(new Runnable() {
@@ -30,7 +29,7 @@ public class UserDataHandler
 			@Override
 			public void run() {
 		
-				Main.serverWindow.updateActivePlayers(playerList.size());
+				Main.serverWindow.updateActivePlayers(playerList.size()); //sends amount of active players
 			}
 		});
 		  }
@@ -44,7 +43,7 @@ public class UserDataHandler
 	  */
 	 public void updateUserList()
 	  {
-		 synchronized(lock) //Threads wanting to work with the method needs to take their turn untill this lock is released
+		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
 		  { 
 			  String users = "";	 
 			  for(int i = 0; i < playerList.size(); i++)
