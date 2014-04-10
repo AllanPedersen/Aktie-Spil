@@ -16,6 +16,8 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import logic.Player;
+
 public class InviteWindow extends JFrame implements MouseListener {
 
 	/**
@@ -24,6 +26,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblMoney, lblTime, lblSpillernavn;
 	private JPanel btnAccept, btnIgnore;
+	private Player player;
 
 	private InviteWindow() {
 		super();
