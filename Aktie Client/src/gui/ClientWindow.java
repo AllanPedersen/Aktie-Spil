@@ -55,6 +55,7 @@ public class ClientWindow extends JFrame {
 		lobby.setServerStatus(1);
 		lobby.setUsername(settings.get(2));
 		
+		// Players here created for test purposes
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player play1 = new Player("Allan", "a@a.dk", "127.0.0.1", 23000);
 		Player play2 = new Player("Mads", "a@a.dk", "127.0.0.1", 23000);

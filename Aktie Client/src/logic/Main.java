@@ -3,7 +3,6 @@ import gui.ClientWindow;
 import gui.InviteWindow;
 import gui.SettingsWindow;
 
-
 public class Main {
 	
 	private static String lcOSName = System.getProperty("os.name").toLowerCase();

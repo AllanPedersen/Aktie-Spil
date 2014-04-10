@@ -33,81 +33,81 @@ public class SettingsWindow extends JFrame implements MouseListener {
 	private JTextField nameTextField;
 	private JTextField emailTextField;
 	private JButton btnGem;
-	
+
 	public SettingsWindow() {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(550, 315);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		FlowLayout fl_topPanel = new FlowLayout();
 		fl_topPanel.setVgap(10);
 		JPanel topPanel = new JPanel(fl_topPanel);
 		topPanel.setBackground(Color.DARK_GRAY);
-		
+
 		getContentPane().add(topPanel, BorderLayout.NORTH);
-		
+
 		JLabel lblAktiespilSettings = new JLabel("Aktiespil - Indstillinger");
 		lblAktiespilSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		lblAktiespilSettings.setForeground(Color.WHITE);
 		topPanel.add(lblAktiespilSettings);
-		
+
 		JPanel settingsPanel = new JPanel();
 		getContentPane().add(settingsPanel, BorderLayout.CENTER);
 		settingsPanel.setLayout(null);
-		
+
 		JLabel lblServerIp = new JLabel("Server IP:");
 		lblServerIp.setBounds(58, 45, 115, 16);
 		settingsPanel.add(lblServerIp);
-		
+
 		JLabel lblServerPort = new JLabel("Server Port:");
 		lblServerPort.setBounds(58, 73, 115, 16);
 		settingsPanel.add(lblServerPort);
-		
+
 		JLabel lblName = new JLabel("Name:");
 		lblName.setBounds(58, 101, 115, 16);
 		settingsPanel.add(lblName);
-		
+
 		JLabel lblEmail = new JLabel("E-mail:");
 		lblEmail.setBounds(58, 129, 115, 16);
 		settingsPanel.add(lblEmail);
-		
+
 		ipTextField = new JTextField();
 		ipTextField.setBounds(169, 39, 324, 28);
 		settingsPanel.add(ipTextField);
 		ipTextField.setColumns(10);
-		
+
 		portTextField = new JTextField();
 		portTextField.setColumns(10);
 		portTextField.setBounds(169, 67, 324, 28);
 		settingsPanel.add(portTextField);
-		
+
 		nameTextField = new JTextField();
 		nameTextField.setColumns(10);
 		nameTextField.setBounds(169, 95, 324, 28);
 		settingsPanel.add(nameTextField);
-		
+
 		emailTextField = new JTextField();
 		emailTextField.setColumns(10);
 		emailTextField.setBounds(169, 123, 324, 28);
 		settingsPanel.add(emailTextField);
-		
+
 		btnGem = new JButton("Gem");
 		btnGem.addMouseListener(this);
 		btnGem.setBounds(240, 186, 75, 29);
 		settingsPanel.add(btnGem);
-		
+
 		this.setResizable(false);
 		this.setVisible(true);
 	}
-	
+
 	/**
 	 * This method returns the values of the text-fields when called
 	 * @return An ArrayList of strings that contain the information specified in the fields
 	 */
 	public ArrayList<String> getSettings() {
 		ArrayList<String> settings = new ArrayList<String>();
-		
+
 		settings.add(this.ipTextField.getText());
 		settings.add(this.portTextField.getText());
 		settings.add(this.nameTextField.getText());
@@ -116,7 +116,7 @@ public class SettingsWindow extends JFrame implements MouseListener {
 		sdh.writeNewSettings(settings);
 		return settings;
 	}
-	
+
 	public void setFieldsNotValid(ArrayList<String> fields) {
 		for (String field : fields) {
 			switch (field) {
@@ -141,10 +141,17 @@ public class SettingsWindow extends JFrame implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnGem) {
-			System.out.println("Gem clicked");
-			System.out.println(this.getSettings().toString());
-			Main.openLobby();
-			this.dispose();
+			// TODO Validate input from user
+			Boolean error = new Boolean(false);
+			ArrayList<String> notValid = new ArrayList<String>();
+
+			if (!error) {
+				this.getSettings().toString();
+				Main.openLobby();
+				this.dispose();
+			} else {
+				setFieldsNotValid(notValid);
+			}
 		}
 	}
 
