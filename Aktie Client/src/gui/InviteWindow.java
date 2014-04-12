@@ -28,7 +28,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private JPanel btnAccept, btnIgnore;
 	private Player player;
 
-	private InviteWindow() {
+	public InviteWindow() {
 		super();
 		this.setResizable(false);
 		this.setSize(444, 266);
@@ -104,20 +104,14 @@ public class InviteWindow extends JFrame implements MouseListener {
 		toFront();
 	}	
 
-	public InviteWindow(String player, String time, String money) {
-		this();
-		// Set information
-		this.lblSpillernavn.setText(player);
-		this.lblMoney.setText(money);
-		this.lblTime.setText(time);
-	}
-
 	/**
 	 * This method accepts the invitation from the other player
 	 */
 	private void acceptInvitation() {
 		// TODO: Notify gameserver of decission
 		
+		// Change main window view to gamepanel
+		ClientWindow.changeLayout("Game");
 		
 		// Close popup window
 		this.dispose();

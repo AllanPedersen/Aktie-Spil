@@ -18,7 +18,7 @@ public class ClientWindow extends JFrame {
 	 * The window will contain a cardlayout, that contains the different screens.
 	 */
 	private static final long serialVersionUID = 1L;
-	private static JPanel contentPane, cards;
+	private static JPanel contentPane, cards, gamePanel;
 	private static CardLayout cl;
 	public static Color green = new Color(183, 210, 120);
 	public static Color hoverGreen = new Color(212, 250, 125);
@@ -66,10 +66,13 @@ public class ClientWindow extends JFrame {
 		players.add(play3);
 		
 		lobby.setPlayerList(players);
+		
+		gamePanel = new StockPanel();
 
 		cl = new CardLayout();
 		cards = new JPanel(cl);
 		cards.add(lobby, "Lobby");
+		cards.add(gamePanel, "Game");
 		
 		contentPane.add(cards);
 		
@@ -84,6 +87,7 @@ public class ClientWindow extends JFrame {
 	public static void changeLayout(String layout) {
 		// TODO: Check if specified layout exists
 		// TODO: Change layout or throw exception
+		cl.show(cards, layout);
 	}
 
 

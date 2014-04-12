@@ -15,6 +15,7 @@ public class Main {
 		if (SettingsDataHandler.settingsExists()) {
 			// Create connection to server, if succes open lobby, otherwise open settings
 			Main.openLobby();
+			Main.invite("Allan", "1 time", "100.000");
 		} else {
 			new SettingsWindow();
 		}
@@ -29,7 +30,7 @@ public class Main {
 	}
 	
 	public static void invite(String name, String time, String money) {
-		new InviteWindow(name, time, money);
+		new InviteWindow();
 	}
 
 }
