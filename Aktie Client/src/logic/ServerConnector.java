@@ -9,11 +9,14 @@ public class ServerConnector implements Runnable
 	
 	public ServerConnector(ClientWindow cw)
     {
-		}
+	
+    
+    }
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	public void run() 
+	{
+
 		
 	}
 }

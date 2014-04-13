@@ -24,14 +24,15 @@ public class UserDataHandler
 		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
 		 {
 			 
-		   SwingUtilities.invokeLater(new Runnable() {
+		   SwingUtilities.invokeLater(new Runnable()
+		   {
 			
 			@Override
 			public void run() {
 		
 				Main.serverWindow.updateActivePlayers(playerList.size()); //sends amount of active players
 			}
-		});
+		   });
 		  }
 	}
 
@@ -60,4 +61,3 @@ public class UserDataHandler
 		  }
 	  }
  
-
