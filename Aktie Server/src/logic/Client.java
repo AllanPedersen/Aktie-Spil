@@ -64,9 +64,9 @@ public class Client implements Runnable {
 	            //request to invite player
 				if(this.fromClient_String.startsWith("ip"))
 				{
-					String[] divideChatString = this.fromClient_String.split(",", 2);
+					String[] divideChatString = this.fromClient_String.split(",", 4);
 					  //Disregards the [0] position which contains the header 'ip'
-					   udh.invitePlayer(divideChatString[1], ip, name);
+					   udh.invitePlayer(divideChatString[1], ip, name, divideChatString[2], divideChatString[3]);
 				}	
 				
 				//user wants to accept invitation

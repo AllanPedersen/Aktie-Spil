@@ -33,15 +33,11 @@ public class Main {
 			    		}
 			    	}
 			    });
-			Main.invite("Allan", "1 time", "100.000");
 		} else {
 			new SettingsWindow();
 		}
 		
 	}
 	
-	public static void invite(String name, String time, String money) {
-		new InviteWindow();
-	}
 
 }

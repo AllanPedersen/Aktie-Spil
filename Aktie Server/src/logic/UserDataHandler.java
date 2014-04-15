@@ -69,7 +69,7 @@ public class UserDataHandler
 	  * @param ip
 	  * @param invitingPlayer
 	  */
-	public void invitePlayer(String playerToInvite, String ip, String invitingPlayer) {
+	public void invitePlayer(String playerToInvite, String ip, String invitingPlayer, String time, String currency) {
 		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
 		  {
 			 
@@ -77,7 +77,7 @@ public class UserDataHandler
 			  {
 				 if(playerToInvite.equals(playerList.get(i)))
 				 {
-				  String message = "iu," + ip + "," + invitingPlayer;	 
+				  String message = "iu," + ip + "," + invitingPlayer + "," + time + "," + currency;	 
 				  playerList.get(i).toClient_PrintWriter.println(message);
 				  playerList.get(i).toClient_PrintWriter.flush();
 				  break; //atm. placed in order to avoid inviting players with same name

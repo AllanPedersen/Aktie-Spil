@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import gui.ClientWindow;
+import gui.InviteWindow;
 
 public class ServerConnector implements Runnable
 {
@@ -49,6 +50,7 @@ public class ServerConnector implements Runnable
 			{
 				this.textFromServer = this.readingFromServer.nextLine();
 				
+				 //updates active users
 				 if(this.textFromServer.startsWith("nu"))
 				    {
 					 	
@@ -72,12 +74,23 @@ public class ServerConnector implements Runnable
 				    	});
 				    	
 				    }	 
+				 
+				 //invited to a game
 				 if(this.textFromServer.startsWith("iu"))
 				    {
+					 final String[] divideString = this.textFromServer.split(","); 
+					 //String message = "iu," + ip + "," + invitingPlayer + "," + time + "," + currency;	
+				    
+					 SwingUtilities.invokeLater(new Runnable() {
+							public void run() 
+							{
+								new InviteWindow();
+								
+							}
+				    	});
 				    }
-				 if(this.textFromServer.startsWith("ai"))
-				    {
-				    }
+				 
+				
 			}	    
 		}
 		
@@ -139,12 +152,15 @@ public class ServerConnector implements Runnable
 		
 	}
 	/**
-	 * used to invite a user
+	 * used to invite a player
+	 * uses the ip as a header
 	 * @param user
 	 */
-	public void inviteUser(String currency, String time)
+	public void inviteUser(String playerToInvite, String currency, String time)
 	{
-		
-		
+		String message;
+		message = "ip," + playerToInvite + "," + time + "," + currency;
+		sendToServer.println(message);
+	    sendToServer.flush();
 	}
 }
