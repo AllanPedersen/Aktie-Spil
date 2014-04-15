@@ -58,20 +58,30 @@ public class Client implements Runnable {
         {
 			if(fromClient_Scanner.hasNextLine())
 			{
-	            //user wants to invite another user
-				if(this.fromClient_String.startsWith("iu"))
+	            //request to invite player
+				if(this.fromClient_String.startsWith("ip"))
 				{
-				
+					String[] divideChatString = this.fromClient_String.split(",", 2);
+					  //Disregards the [0] position which contains the header 'ip'
+					   udh.invitePlayer(divideChatString[1], ip, name);
 				}	
 				
 				//user wants to accept invitation
 				if(this.fromClient_String.startsWith("ai"))
 				{
+					String[] divideChatString = this.fromClient_String.split(",", 2);
+					 //Disregards the [0] position which contains the header 'ai'
+					udh.acceptInvitation(ip, name, divideChatString[1]); //accepts invitation
+						
+					
 				}
 				
 				//user closed his application
 				if(this.fromClient_String.startsWith("x"))
 				{
+					udh.removeMe(this); //removes client from arrayList
+					udh.updateUserList(); //updates the view for all other clients
+					this.connected = false; //stops the while loop
 				}	
 				
 			}

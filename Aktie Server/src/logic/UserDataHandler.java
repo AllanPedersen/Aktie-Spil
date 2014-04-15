@@ -56,8 +56,72 @@ public class UserDataHandler
 				  {
 					  String message = "nu,"+ users;  
 					  playerList.get(i).toClient_PrintWriter.println(message);
+					  playerList.get(i).toClient_PrintWriter.flush();
 				  }
 			  }
 		  }
+
+
+
+	 /**
+	  * invites a user to join a game
+	  * @param playerToInvite
+	  * @param ip
+	  * @param invitingPlayer
+	  */
+	public void invitePlayer(String playerToInvite, String ip, String invitingPlayer) {
+		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
+		  {
+			 
+			 for(int i = 0; i < playerList.size(); i++)
+			  {
+				 if(playerToInvite.equals(playerList.get(i)))
+				 {
+				  String message = "iu," + ip + "," + invitingPlayer;	 
+				  playerList.get(i).toClient_PrintWriter.println(message);
+				  playerList.get(i).toClient_PrintWriter.flush();
+				  break; //atm. placed in order to avoid inviting players with same name
+				 }
+			}
+			 
+		  }
+		  
+		}
+
+
+	/**
+	 * removes client from list
+	 * @param client
+	 */
+	public void removeMe(Client client) {
+		synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
+		  {
+			 for(int i = 0; i < playerList.size(); i++)
+			  {
+				  if(playerList.contains(client))
+				  {
+					  playerList.remove(client);
+				  }
+			  } 
+			
+		  }
+	}
+	
+	public void acceptInvitation(String ip, String acceptingPlayer, String invitingPlayer)
+	{
+		synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
+		  {
+			for(int i = 0; i < playerList.size(); i++)
+			  {
+			    if(playerList.get(i).name.equals(invitingPlayer))
+			    {
+			    	String message = "ai," + ip + "," + acceptingPlayer;
+			    	playerList.get(i).toClient_PrintWriter.println(message);
+			    	playerList.get(i).toClient_PrintWriter.flush();
+			    }
+			  }
+		  }
+	}
+	
 	  }
  
