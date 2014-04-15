@@ -1,8 +1,10 @@
 package logic;
 
+import xml.Parser;
+
 public class Stock {
 	
-	private String name;
+	private String name, symbol;
 	private double value;
 	private int bankAmount = 0;
 	private double boughtValue = 0;
@@ -18,6 +20,14 @@ public class Stock {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getSymbol() {
+		return this.symbol;
+	}
+	
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	public double getValue() {
@@ -42,11 +52,9 @@ public class Stock {
 	public double getValueNow() {
 		double newV = 0;
 		
-		// TODO for test remove
-		return this.value;
+		newV = Parser.getValueFromSymbol(this.symbol);
 		
-		// TODO: Get value online
-		//return newV;
+		return newV;
 	}
 	
 	public boolean equals(Object other) {
