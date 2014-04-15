@@ -41,8 +41,12 @@ public class Stock {
 	 */
 	public double getValueNow() {
 		double newV = 0;
+		
+		// TODO for test remove
+		return this.value;
+		
 		// TODO: Get value online
-		return newV;
+		//return newV;
 	}
 	
 	public boolean equals(Object other) {

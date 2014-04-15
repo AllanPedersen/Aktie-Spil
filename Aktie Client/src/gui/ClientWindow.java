@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import logic.Player;
 import logic.ServerConnector;
 import logic.SettingsDataHandler;
+import logic.Stock;
 
 public class ClientWindow extends JFrame {
 	
@@ -19,7 +20,8 @@ public class ClientWindow extends JFrame {
 	 * The window will contain a cardlayout, that contains the different screens.
 	 */
 	private static final long serialVersionUID = 1L;
-	private static JPanel contentPane, cards, gamePanel;
+	private static JPanel contentPane, cards;
+	private StockPanel gamePanel;
 	private static CardLayout cl;
 	public static Color green = new Color(183, 210, 120);
 	public static Color hoverGreen = new Color(212, 250, 125);
@@ -86,6 +88,19 @@ public class ClientWindow extends JFrame {
 		lobby.setPlayerList(players);
 		
 		gamePanel = new StockPanel();
+		
+		Stock st1 = new Stock("Microsoft", 120.23);
+		Stock st2 = new Stock("Apple", 221.12);
+		st2.setBankAmount(3);
+		st2.setBoughtValue(223);
+		Stock st3 = new Stock("Google", 170.07);
+		
+		ArrayList<Stock> stocks = new ArrayList<Stock>();
+		stocks.add(st1);
+		stocks.add(st2);
+		stocks.add(st3);
+		
+		gamePanel.setStockList(stocks);
 
 		cl = new CardLayout();
 		cards = new JPanel(cl);
@@ -95,7 +110,7 @@ public class ClientWindow extends JFrame {
 		contentPane.add(cards);
 		
 		// Show the default layout
-		cl.show(cards, "Lobby");
+		cl.show(cards, "Game");
 		
 		// Lock window size and set visible
 		this.setResizable(false);
