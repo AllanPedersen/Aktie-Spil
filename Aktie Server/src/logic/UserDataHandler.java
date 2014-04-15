@@ -122,6 +122,15 @@ public class UserDataHandler
 			  }
 		  }
 	}
+
+
+
+	public void joinPlayers(Client client) {
+		synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
+		  {
+			this.playerList.add(client);
+		  }
+	}
 	
 	  }
  

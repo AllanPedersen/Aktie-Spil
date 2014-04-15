@@ -177,7 +177,8 @@ public class ServerWindow
 		 */
 	    public void updateActivePlayers(int activePlayers)
 		{
-	
+	    	
+	    	System.out.println(activePlayers);
 			this.activePlayers_label.setText(Integer.toString(activePlayers));
 		}
 	    

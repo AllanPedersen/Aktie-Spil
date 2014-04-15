@@ -26,10 +26,12 @@ public class ClientWindow extends JFrame {
 	public static Color red = new Color(254, 99, 99);
 	public static Color hoverRed = new Color(241, 145, 145);
 
+	private ServerConnector sc;
+	
 	public ClientWindow() {
 		super();
 		SettingsDataHandler sdh = new SettingsDataHandler();	
-		ServerConnector sc = new ServerConnector(this, sdh);
+		this.sc = new ServerConnector(this, sdh);
 		this.setTitle("Aktiespil");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
@@ -40,6 +42,19 @@ public class ClientWindow extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		Lobby lobby = new Lobby();
+		
+		 /**
+	     * Used to react when user closes the application.
+	     * Notifies the server to remove from all populated lists.
+	     */
+		  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+
+		        @Override
+				public void run() {
+		          sc.removeMeFromServer();
+		         
+		        }
+		    }));
 		
 		// Test highscore array. Will be replaced with server content.
 		// TODO: Replace with server content

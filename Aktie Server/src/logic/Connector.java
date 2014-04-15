@@ -29,7 +29,6 @@ public class Connector implements Runnable
 	 */
 	public Connector(int port)
 	{
-		System.out.println("you got here");
       this.udh = new UserDataHandler(); //creates the instance of UDH
       this.port = port;
       

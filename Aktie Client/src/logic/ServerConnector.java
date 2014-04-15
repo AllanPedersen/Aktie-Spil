@@ -91,4 +91,14 @@ public class ServerConnector implements Runnable
 		this.email = userSettings.get(3);
 		
 	}
+
+	/**
+	 * used to tell the server that the application has been closed
+	 */
+	public void removeMeFromServer() {
+		
+	    sendToServer.println("x");
+	      sendToServer.flush();
+		
+	}
 }

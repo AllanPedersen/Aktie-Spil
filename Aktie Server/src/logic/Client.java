@@ -27,7 +27,6 @@ public class Client implements Runnable {
 	   try {
 			this.toClient_PrintWriter = new PrintWriter(this.clientSocket.getOutputStream()); //link printWriter to the sockets outputStream
 			this.fromClient_Scanner = new Scanner(this.clientSocket.getInputStream()); //link scanner to the sockets inputStream      
-			System.out.println("hello du er nu på serveren");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
@@ -44,10 +43,10 @@ public class Client implements Runnable {
 		   this.ip = divideChatString[2];
 		   this.port = divideChatString[3];
 		   this.email = divideChatString[4];
-		   udh.countUsers(); //used to update on server how many active players there are.
-           udh.updateUserList(); //sends a new list of active users to all connected players
 		}
-	   
+       udh.joinPlayers(this); //sends itself to join the list of active players
+	   udh.countUsers(); //used to update on server how many active players there are.       
+	   udh.updateUserList(); //sends a new list of active users to all connected players
 
 	}
 
