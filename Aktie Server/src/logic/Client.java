@@ -46,6 +46,7 @@ public class Client implements Runnable {
 		}
        udh.joinPlayers(this); //sends itself to join the list of active players
 	   udh.countUsers(); //used to update on server how many active players there are.       
+	  
 	   udh.updateUserList(); //sends a new list of active users to all connected players
 
 	}
@@ -84,6 +85,7 @@ public class Client implements Runnable {
 					udh.removeMe(this); //removes client from arrayList
 					udh.updateUserList(); //updates the view for all other clients
 					this.connected = false; //stops the while loop
+					udh.countUsers();
 				}	
 				
 			}

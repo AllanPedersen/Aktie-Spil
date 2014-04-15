@@ -50,11 +50,12 @@ public class UserDataHandler
 			  for(int i = 0; i < playerList.size(); i++)
 				  {
 					  users += ","+ playerList.get(i).name;
+					  System.out.println(users);
 				  }
 		  
 				  for(int i = 0; i < playerList.size(); i++)
 				  {
-					  String message = "nu,"+ users;  
+					  String message = "nu"+ users;  
 					  playerList.get(i).toClient_PrintWriter.println(message);
 					  playerList.get(i).toClient_PrintWriter.flush();
 				  }
