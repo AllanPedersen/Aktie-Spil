@@ -147,7 +147,6 @@ public class SettingsWindow extends JFrame implements MouseListener {
 
 			if (!error) {
 				this.getSettings().toString();
-				Main.openLobby();
 				this.dispose();
 			} else {
 				setFieldsNotValid(notValid);
