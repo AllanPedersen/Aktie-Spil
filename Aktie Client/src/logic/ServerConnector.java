@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import gui.ClientWindow;
 
@@ -42,7 +43,36 @@ public class ServerConnector implements Runnable
 	@Override
 	public void run() 
 	{
-		System.out.println("hurra");
+		while(true)
+		{
+			if(this.readingFromServer.hasNextLine())
+			{
+				this.textFromServer = this.readingFromServer.nextLine();
+				
+				 if(this.textFromServer.startsWith("nu"))
+				    {
+					 	
+					 final String[] divideUpdateString = this.textFromServer.split(","); //divides the incoming text into a String array
+				    	final String[] userNames = new String[divideUpdateString.length-1];
+				    	System.arraycopy(divideUpdateString, 1, userNames, 0, userNames.length); //copies everything from dividedUpdateString starting from position 1 to userNames
+				    	System.out.println(userNames[0]);
+				    	System.out.println(divideUpdateString[0]);
+				    	SwingUtilities.invokeLater(new Runnable() {
+							public void run() 
+							{
+								
+							}
+				    	});
+				    	
+				    }	 
+				 if(this.textFromServer.startsWith("iu"))
+				    {
+				    }
+				 if(this.textFromServer.startsWith("ai"))
+				    {
+				    }
+			}	    
+		}
 		
 	}
 	
