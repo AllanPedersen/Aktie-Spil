@@ -28,7 +28,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private JPanel btnAccept, btnIgnore;
 	private Player player;
 
-	public InviteWindow() {
+	public InviteWindow(String player, String time, String currency) {
 		super();
 		this.setResizable(false);
 		this.setSize(444, 266);
@@ -55,7 +55,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		lblDuErBlevet.setBounds(16, 16, 212, 16);
 		panel_1.add(lblDuErBlevet);
 
-		lblSpillernavn = new JLabel("Spillernavn");
+		lblSpillernavn = new JLabel(player);
 		lblSpillernavn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblSpillernavn.setBounds(240, 16, 198, 16);
 		panel_1.add(lblSpillernavn);
@@ -68,12 +68,12 @@ public class InviteWindow extends JFrame implements MouseListener {
 		lblStartKapital.setBounds(16, 87, 139, 16);
 		panel_1.add(lblStartKapital);
 
-		lblTime = new JLabel("1 time");
+		lblTime = new JLabel(time);
 		lblTime.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblTime.setBounds(167, 59, 139, 16);
 		panel_1.add(lblTime);
 
-		lblMoney = new JLabel("USD $50.000");
+		lblMoney = new JLabel(currency);
 		lblMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblMoney.setBounds(167, 87, 139, 16);
 		panel_1.add(lblMoney);

@@ -84,7 +84,8 @@ public class ServerConnector implements Runnable
 					 SwingUtilities.invokeLater(new Runnable() {
 							public void run() 
 							{
-								new InviteWindow();
+								System.out.println("TEST");
+								new InviteWindow(divideString[2], divideString[3], divideString[4]);
 								
 							}
 				    	});

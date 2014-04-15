@@ -72,10 +72,9 @@ public class UserDataHandler
 	public void invitePlayer(String playerToInvite, String ip, String invitingPlayer, String time, String currency) {
 		 synchronized(lock) //Threads wanting to work with the method needs to take their turn until this lock is released
 		  {
-			 
 			 for(int i = 0; i < playerList.size(); i++)
 			  {
-				 if(playerToInvite.equals(playerList.get(i)))
+				 if(playerToInvite.equals(playerList.get(i).name))
 				 {
 				  String message = "iu," + ip + "," + invitingPlayer + "," + time + "," + currency;	 
 				  playerList.get(i).toClient_PrintWriter.println(message);
