@@ -50,7 +50,6 @@ public class UserDataHandler
 			  for(int i = 0; i < playerList.size(); i++)
 				  {
 					  users += ","+ playerList.get(i).name;
-					  System.out.println(users);
 				  }
 		  
 				  for(int i = 0; i < playerList.size(); i++)

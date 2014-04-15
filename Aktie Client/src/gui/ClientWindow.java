@@ -77,9 +77,9 @@ public class ClientWindow extends JFrame {
 		
 		// Players here created for test purposes
 		ArrayList<Player> players = new ArrayList<Player>();
-		Player play1 = new Player("Allan", "a@a.dk", "127.0.0.1", 23000);
-		Player play2 = new Player("Mads", "a@a.dk", "127.0.0.1", 23000);
-		Player play3 = new Player("Rune", "a@a.dk", "127.0.0.1", 23000);
+		Player play1 = new Player("Allan");
+		Player play2 = new Player("Mads");
+		Player play3 = new Player("Rune");
 		
 		players.add(play1);
 		players.add(play2);

@@ -5,7 +5,7 @@ public class Player {
 	private String name, email, ip;
 	private int port;
 	
-	public Player(String name, String email, String ip, int port) {
+	public Player(String name) {
 		this.setName(name);
 		this.setEmail(email);
 		this.setIp(ip);

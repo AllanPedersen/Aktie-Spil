@@ -56,7 +56,6 @@ public class ServerConnector implements Runnable
 				    	final String[] userNames = new String[divideUpdateString.length-1];
 				    	System.arraycopy(divideUpdateString, 1, userNames, 0, userNames.length); //copies everything from dividedUpdateString starting from position 1 to userNames
 				    	System.out.println(userNames[0]);
-				    	System.out.println(divideUpdateString[0]);
 				    	SwingUtilities.invokeLater(new Runnable() {
 							public void run() 
 							{
