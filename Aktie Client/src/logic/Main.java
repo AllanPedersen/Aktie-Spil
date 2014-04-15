@@ -15,7 +15,7 @@ public class Main {
 	{
 	
 
-		// Check if settings isset
+		// Check if settings is set
 		if (SettingsDataHandler.settingsExists()) {
 			// Create connection to server, if succes open lobby, otherwise open settings
 			  SwingUtilities.invokeLater(new Runnable()
@@ -24,6 +24,7 @@ public class Main {
 			    	{
 			    		try
 			    		{
+			    			
 			    			clientWindow = new ClientWindow();
 			    		}
 			    		catch(Exception e)

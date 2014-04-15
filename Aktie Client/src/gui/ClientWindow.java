@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import logic.Player;
+import logic.ServerConnector;
 import logic.SettingsDataHandler;
 
 public class ClientWindow extends JFrame {
@@ -27,6 +28,8 @@ public class ClientWindow extends JFrame {
 
 	public ClientWindow() {
 		super();
+		SettingsDataHandler sdh = new SettingsDataHandler();	
+		ServerConnector sc = new ServerConnector(this, sdh);
 		this.setTitle("Aktiespil");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
@@ -47,7 +50,7 @@ public class ClientWindow extends JFrame {
 		highscores.add("Mads");
 		highscores.add("Maria");
 		
-		SettingsDataHandler sdh = new SettingsDataHandler();
+	
 		ArrayList<String> settings = new ArrayList<String>();
 		settings = sdh.getSettings();
 		
