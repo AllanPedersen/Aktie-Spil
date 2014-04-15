@@ -23,6 +23,8 @@ public class ClientWindow extends JFrame {
 	private static JPanel contentPane, cards;
 	private StockPanel gamePanel;
 	private static CardLayout cl;
+	
+	public Lobby lobby;
 	public static Color green = new Color(183, 210, 120);
 	public static Color hoverGreen = new Color(212, 250, 125);
 	public static Color red = new Color(254, 99, 99);
@@ -43,7 +45,7 @@ public class ClientWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		Lobby lobby = new Lobby();
+		this.lobby = new Lobby();
 		
 		 /**
 	     * Used to react when user closes the application.
@@ -75,17 +77,6 @@ public class ClientWindow extends JFrame {
 		lobby.setServerStatus(1);
 		lobby.setUsername(settings.get(2));
 		
-		// Players here created for test purposes
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player play1 = new Player("Allan");
-		Player play2 = new Player("Mads");
-		Player play3 = new Player("Rune");
-		
-		players.add(play1);
-		players.add(play2);
-		players.add(play3);
-		
-		lobby.setPlayerList(players);
 		
 		gamePanel = new StockPanel();
 		
@@ -110,7 +101,7 @@ public class ClientWindow extends JFrame {
 		contentPane.add(cards);
 		
 		// Show the default layout
-		cl.show(cards, "Game");
+		cl.show(cards, "Lobby");
 		
 		// Lock window size and set visible
 		this.setResizable(false);

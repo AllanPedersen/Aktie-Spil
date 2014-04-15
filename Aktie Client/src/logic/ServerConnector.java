@@ -55,10 +55,18 @@ public class ServerConnector implements Runnable
 					 final String[] divideUpdateString = this.textFromServer.split(","); //divides the incoming text into a String array
 				    	final String[] userNames = new String[divideUpdateString.length-1];
 				    	System.arraycopy(divideUpdateString, 1, userNames, 0, userNames.length); //copies everything from dividedUpdateString starting from position 1 to userNames
-				    	System.out.println(userNames[0]);
+				    	
 				    	SwingUtilities.invokeLater(new Runnable() {
 							public void run() 
 							{
+								
+								// Players here created for test purposes
+								ArrayList<Player> players = new ArrayList<Player>();
+								 for(int i = 0; i < userNames.length; i++)
+								  {
+									 players.add(new Player(userNames[i]));
+								  }
+								cw.lobby.setPlayerList(players);
 								
 							}
 				    	});
