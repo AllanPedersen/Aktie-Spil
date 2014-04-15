@@ -1,8 +1,6 @@
 package logic;
 import javax.swing.SwingUtilities;
-
 import gui.ClientWindow;
-import gui.InviteWindow;
 import gui.SettingsWindow;
 
 public class Main {
@@ -24,7 +22,6 @@ public class Main {
 			    	{
 			    		try
 			    		{
-			    			
 			    			clientWindow = new ClientWindow();
 			    		}
 			    		catch(Exception e)

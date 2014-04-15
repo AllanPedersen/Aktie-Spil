@@ -2,13 +2,11 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import xml.Parser;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
-
-import logic.Player;
 import logic.ServerConnector;
 import logic.SettingsDataHandler;
 import logic.Stock;
@@ -80,16 +78,7 @@ public class ClientWindow extends JFrame {
 		
 		gamePanel = new StockPanel();
 		
-		Stock st1 = new Stock("Microsoft", 120.23);
-		Stock st2 = new Stock("Apple", 221.12);
-		st2.setBankAmount(3);
-		st2.setBoughtValue(223);
-		Stock st3 = new Stock("Google", 170.07);
-		
-		ArrayList<Stock> stocks = new ArrayList<Stock>();
-		stocks.add(st1);
-		stocks.add(st2);
-		stocks.add(st3);
+		ArrayList<Stock> stocks = Parser.getAllStocks();
 		
 		gamePanel.setStockList(stocks);
 
@@ -101,7 +90,7 @@ public class ClientWindow extends JFrame {
 		contentPane.add(cards);
 		
 		// Show the default layout
-		cl.show(cards, "Lobby");
+		cl.show(cards, "Game");
 		
 		// Lock window size and set visible
 		this.setResizable(false);

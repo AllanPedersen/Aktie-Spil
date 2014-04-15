@@ -194,7 +194,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		lblStockName.setText(this.selectedStock.getName());
 
 		// Set value of stock
-		lblStockPrice.setText("$" + this.selectedStock.getValueNow());
+		lblStockPrice.setText("$" + this.selectedStock.getValue());
 
 		// Set number of bought stocks
 		lblDuEjerX.setText("Du ejer "+ this.selectedStock.getBankAmount() +" stk. af denne aktie til en samlet v\u00E6rdi af: $ " + (this.selectedStock.getBankAmount() * this.selectedStock.getValueNow()));
