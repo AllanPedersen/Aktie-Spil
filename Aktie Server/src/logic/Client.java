@@ -27,7 +27,7 @@ public class Client implements Runnable {
 	   try {
 			this.toClient_PrintWriter = new PrintWriter(this.clientSocket.getOutputStream()); //link printWriter to the sockets outputStream
 			this.fromClient_Scanner = new Scanner(this.clientSocket.getInputStream()); //link scanner to the sockets inputStream      
-			
+			System.out.println("hello du er nu på serveren");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
@@ -35,8 +35,9 @@ public class Client implements Runnable {
 	   /**
 	    * expects client to send its personal data to the server upon connecting
 	    */
-	   if(fromClient_Scanner.hasNextLine() & fromClient_Scanner.next().startsWith("fm"))
+	   if(fromClient_Scanner.hasNextLine())
 		{
+		   this.fromClient_String = fromClient_Scanner.nextLine();
 		   String[] divideChatString = this.fromClient_String.split(",", 5); //splits data into 5 seperate values
 		   //Disregards the [0] position which contains the header 'fm'
 		   this.name = divideChatString[1];
@@ -58,6 +59,8 @@ public class Client implements Runnable {
         {
 			if(fromClient_Scanner.hasNextLine())
 			{
+				this.fromClient_String = fromClient_Scanner.nextLine();
+	        	
 	            //request to invite player
 				if(this.fromClient_String.startsWith("ip"))
 				{
