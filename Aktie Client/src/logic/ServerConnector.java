@@ -9,7 +9,7 @@ public class ServerConnector implements Runnable
 	
 	public ServerConnector(ClientWindow cw)
     {
-	
+	  this.cw = cw;
     
     }
 

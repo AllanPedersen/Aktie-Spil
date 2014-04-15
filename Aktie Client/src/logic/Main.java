@@ -9,13 +9,13 @@ public class Main {
 	public static boolean IS_MAC = lcOSName.startsWith("mac os x");
 
 	public static void main(String[] args) {
-		System.out.println("Hello, this is the client");
+	
 		
 		// Check if settings isset
 		if (SettingsDataHandler.settingsExists()) {
 			// Create connection to server, if succes open lobby, otherwise open settings
 			Main.openLobby();
-			Main.invite("Allan", "1 time", "100.000");
+			//Main.invite("Allan", "1 time", "100.000");
 		} else {
 			new SettingsWindow();
 		}
