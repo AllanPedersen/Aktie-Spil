@@ -36,8 +36,8 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	private JLabel lblPlayer;
 	private String selectedCurrency;
 	private Player player;
-    private ServerConnector sc;
-	
+	private ServerConnector sc;
+	private JComboBox<String> time, money;
 	/**
 	 * Create the frame.
 	 */
@@ -51,22 +51,22 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setVgap(8);
 		panel.setBackground(Color.DARK_GRAY);
 		getContentPane().add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblInviterSpiller = new JLabel("Inviter spiller");
 		lblInviterSpiller.setForeground(Color.WHITE);
 		lblInviterSpiller.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		panel.add(lblInviterSpiller);
-		
+
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
-		
+
 		btnInvite = new JPanel();
 		btnInvite.addMouseListener(this);
 		btnInvite.setBackground(ClientWindow.green);
@@ -74,40 +74,40 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 		fl_btnInvite.setVgap(11);
 		btnInvite.setBounds(17, 192, 415, 44);
 		panel_1.add(btnInvite);
-		
+
 		lblInviterSpilelr = new JLabel("Inviter spiller");
 		lblInviterSpilelr.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnInvite.add(lblInviterSpilelr);
-		
+
 		JLabel lblSendInvitationTil = new JLabel("Send invitation til:");
 		lblSendInvitationTil.setBounds(17, 17, 115, 16);
 		panel_1.add(lblSendInvitationTil);
-		
+
 		lblPlayer = new JLabel(this.player.getName());
 		lblPlayer.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblPlayer.setBounds(144, 17, 288, 16);
 		panel_1.add(lblPlayer);
-		
+
 		JLabel lblLngdeAfSpil = new JLabel("L\u00E6ngde af spil:");
 		lblLngdeAfSpil.setBounds(17, 60, 115, 16);
 		panel_1.add(lblLngdeAfSpil);
-		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"20 min", "30 min", "1 time", "2 timer", "5 timer"}));
-		comboBox.setBounds(17, 81, 415, 27);
-		panel_1.add(comboBox);
-		
+
+		time = new JComboBox<String>();
+		time.setModel(new DefaultComboBoxModel<String>(new String[] {"20 min", "30 min", "1 time", "2 timer", "5 timer"}));
+		time.setBounds(17, 81, 415, 27);
+		panel_1.add(time);
+
 		JLabel lblStartKapital = new JLabel("Start kapital:");
 		lblStartKapital.setBounds(17, 120, 115, 16);
 		panel_1.add(lblStartKapital);
-		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"10.000", "100.000", "500.000", "1.000.000", "5.000.000"}));
-		this.selectedCurrency = comboBox_1.setSelectedIndex(2);
-		comboBox_1.setBounds(17, 141, 415, 27);
-		panel_1.add(comboBox_1);
-		
-		
+
+		money = new JComboBox<String>();
+		money.setModel(new DefaultComboBoxModel<String>(new String[] {"10.000", "100.000", "500.000", "1.000.000", "5.000.000"}));
+		money.setSelectedIndex(2);
+		money.setBounds(17, 141, 415, 27);
+		panel_1.add(money);
+
+
 		setVisible(true);
 		toFront();
 	}
@@ -116,7 +116,7 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnInvite) {
 			btnInvite.setBackground(Color.gray);
-			sc.inviteUser(, time);
+			//sc.inviteUser(this.money.getSelectedItem().toString(), this.time.getSelectedItem().toString());
 			lblInviterSpilelr.setText(btnTextWaitForPlayer);
 			waiting = true;
 		}
@@ -138,7 +138,7 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 				btnInvite.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 		}
-		
+
 	}
 
 	@Override

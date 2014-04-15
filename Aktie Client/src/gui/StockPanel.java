@@ -29,7 +29,7 @@ public class StockPanel extends JPanel implements MouseListener {
 	private boolean hasStock = false;
 	private Stock selectedStock = null;
 	private ArrayList<Stock> stocks;
-	private JLabel lblStockName, lblStockPrice, lblDuEjerX, lblDuKanKbe, lblAktiensPrisEr, lblHvisDuSlger, lblPridForAktie;
+	private JLabel lblStockName, lblStockPrice, lblDuEjerX, lblDuKanKbe, lblAktiensPrisEr, lblHvisDuSlger, lblPridForAktie, lblYourMoney, lblOpponentMoney, lblTime;
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
 
@@ -50,7 +50,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblDig = new JLabel("Dig:");
 		panel_2.add(lblDig);
 
-		JLabel lblYourMoney = new JLabel("$100.000 US");
+		lblYourMoney = new JLabel("$100.000 US");
 		lblYourMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_2.add(lblYourMoney);
 
@@ -63,7 +63,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblModstander = new JLabel("Modstander:");
 		panel_3.add(lblModstander);
 
-		JLabel lblOpponentMoney = new JLabel("$87.000 US");
+		lblOpponentMoney = new JLabel("$87.000 US");
 		lblOpponentMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_3.add(lblOpponentMoney);
 
@@ -76,7 +76,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblTidTilbage = new JLabel("Tid tilbage:");
 		panel_4.add(lblTidTilbage);
 
-		JLabel lblTime = new JLabel("1 time 13 min");
+		lblTime = new JLabel("1 time 13 min");
 		lblTime.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_4.add(lblTime);
 

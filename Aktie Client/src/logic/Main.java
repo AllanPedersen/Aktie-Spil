@@ -33,7 +33,7 @@ public class Main {
 			    		}
 			    	}
 			    });
-			//Main.invite("Allan", "1 time", "100.000");
+			Main.invite("Allan", "1 time", "100.000");
 		} else {
 			new SettingsWindow();
 		}
