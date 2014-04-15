@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import logic.Player;
+import logic.ServerConnector;
 
 public class DoInviteWindow extends JFrame implements MouseListener, WindowListener {
 
@@ -33,13 +34,16 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	private JLabel lblInviterSpilelr;
 	private boolean waiting = false;
 	private JLabel lblPlayer;
+	private String selectedCurrency;
 	private Player player;
-
+    private ServerConnector sc;
+	
 	/**
 	 * Create the frame.
 	 */
-	public DoInviteWindow(Player player) {
+	public DoInviteWindow(Player player, ServerConnector sc) {
 		super();
+		this.sc = sc;
 		this.player = player;
 		this.addWindowListener(this);
 		setResizable(false);
@@ -99,7 +103,7 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 		
 		JComboBox<String> comboBox_1 = new JComboBox<String>();
 		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"10.000", "100.000", "500.000", "1.000.000", "5.000.000"}));
-		comboBox_1.setSelectedIndex(2);
+		this.selectedCurrency = comboBox_1.setSelectedIndex(2);
 		comboBox_1.setBounds(17, 141, 415, 27);
 		panel_1.add(comboBox_1);
 		
@@ -112,6 +116,7 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnInvite) {
 			btnInvite.setBackground(Color.gray);
+			sc.inviteUser(, time);
 			lblInviterSpilelr.setText(btnTextWaitForPlayer);
 			waiting = true;
 		}

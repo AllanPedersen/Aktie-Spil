@@ -45,7 +45,7 @@ public class ClientWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		this.lobby = new Lobby();
+		this.lobby = new Lobby(this.sc);
 		
 		 /**
 	     * Used to react when user closes the application.
@@ -63,11 +63,11 @@ public class ClientWindow extends JFrame {
 		// Test highscore array. Will be replaced with server content.
 		// TODO: Replace with server content
 		ArrayList<String> highscores = new ArrayList<String>();
-		highscores.add("Chris");
-		highscores.add("Allan");
-		highscores.add("Peter");
-		highscores.add("Mads");
-		highscores.add("Maria");
+		highscores.add("Chris: 780.000 kr");
+		highscores.add("Allan: 15.000 kr");
+		highscores.add("Peter: 12 kr");
+		highscores.add("Mads: 10 kr");
+		highscores.add("Maria: 10 kr");
 		
 	
 		ArrayList<String> settings = new ArrayList<String>();

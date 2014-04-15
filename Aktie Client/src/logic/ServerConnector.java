@@ -138,4 +138,13 @@ public class ServerConnector implements Runnable
 	      sendToServer.flush();
 		
 	}
+	/**
+	 * used to invite a user
+	 * @param user
+	 */
+	public void inviteUser(String currency, String time)
+	{
+		
+		
+	}
 }

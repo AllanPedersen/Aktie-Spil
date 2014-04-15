@@ -2,14 +2,18 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
+
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -17,6 +21,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
 import logic.Player;
+import logic.ServerConnector;
 
 public class Lobby extends JPanel implements MouseListener {
 
@@ -24,6 +29,7 @@ public class Lobby extends JPanel implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public ServerConnector sc;
 	private JPanel invitePanel;
 	private JPanel status;
 	private JLabel lblPlayerName;
@@ -35,11 +41,11 @@ public class Lobby extends JPanel implements MouseListener {
 	/**
 	 * Create the panel.
 	 */
-	public Lobby() {
+	public Lobby(ServerConnector sc) {
 		super();
 		this.setSize(800, 600);
 		this.setLayout(null);
-		
+		this.sc = sc;
 		JLabel lblVelkommen = new JLabel("Velkommen");
 		lblVelkommen.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblVelkommen.setBounds(16, 16, 114, 22);
@@ -264,7 +270,7 @@ public class Lobby extends JPanel implements MouseListener {
 		if (e.getSource() == invitePanel) {
 			if (playerList.getSelectedIndex() >= 0) {
 				Player player = this.players.get(playerList.getSelectedIndex());
-				new DoInviteWindow(player);
+				new DoInviteWindow(player, sc);
 			} else {
 				JOptionPane.showMessageDialog(this, "Select a player first");
 			}
