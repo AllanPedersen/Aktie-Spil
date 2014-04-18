@@ -83,7 +83,7 @@ public class ClientWindow extends JFrame {
 		contentPane.add(cards);
 		
 		// Show the default layout
-		cl.show(cards, "Game");
+		cl.show(cards, "Lobby");
 		
 		// Lock window size and set visible
 		this.setResizable(false);
