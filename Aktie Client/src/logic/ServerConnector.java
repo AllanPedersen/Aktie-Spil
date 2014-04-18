@@ -202,7 +202,7 @@ public class ServerConnector implements Runnable
 	 */
 	public void inviteUser(String playerToInvite, String currency, String time, DoInviteWindow doInviteWindow)
 	{
-		doInviteWindow = doInviteWindow; // need to keep this reference to accept or deny invitation
+		this.doInvitWindow = doInviteWindow; // need to keep this reference to accept or deny invitation
 		String message;
 		message = "ip," + playerToInvite + "," + time + "," + currency;
 		sendToServer.println(message);
