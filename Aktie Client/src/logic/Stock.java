@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Date;
+
 import xml.Parser;
 
 public class Stock {
@@ -8,10 +10,12 @@ public class Stock {
 	private double value;
 	private int bankAmount = 0;
 	private double boughtValue = 0;
+	private long timestamp = 0;
 	
 	public Stock(String name, double value) {
 		this.setName(name);
 		this.setValue(value);
+		this.timestamp = new Date().getTime();
 	}
 
 	public String getName() {
@@ -31,6 +35,12 @@ public class Stock {
 	}
 
 	public double getValue() {
+		// If value is more than 5 mins old then update.
+		long newTime = new Date().getTime();
+		if ((newTime - timestamp) > (5*60*1000)) {
+			this.updateValue();
+			this.timestamp = newTime;
+		}
 		return value;
 	}
 
