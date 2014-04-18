@@ -1,17 +1,26 @@
 package gui;
 
 import javax.swing.JFrame;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import logic.Bank;
+import logic.ConnectionToPlayer;
+import logic.ServerConnector;
 import logic.Stock;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
@@ -135,7 +144,7 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnBuy) {
 			this.buy();
-			System.out.println("BANK SALDO: " + this.bank.getAmount());
+			ConnectionToPlayer.sendToOther.println("bs"+","+this.bank.getAmount());
 			stPanel.updateView();
 			this.dispose();
 		}

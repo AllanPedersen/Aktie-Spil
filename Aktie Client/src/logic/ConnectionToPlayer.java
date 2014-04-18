@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 public class ConnectionToPlayer implements Runnable 
 { 
 	private Socket socket;
-	private PrintWriter sendToOther;
+	public static PrintWriter sendToOther;
 	private Scanner readingFromOther;
 	private String textFromOther;
 	private String currency;
@@ -119,10 +119,25 @@ public class ConnectionToPlayer implements Runnable
 				this.textFromOther = this.readingFromOther.nextLine();
 				
 				
-				
+				//I bought stock
 				if(textFromOther.startsWith("bs"))
 				{
-					
+					 final String[] divideChatString = this.textFromOther.split(",", 2); //splits data into a max of 2 values
+					 SwingUtilities.invokeLater(new Runnable()
+						{
+						public void run()
+						{
+							try
+							{
+								double temp = Double.parseDouble(divideChatString[1]);
+								Main.clientWindow.gamePanel.setOpponentMoney(temp);
+				    		}
+				    		catch(Exception e)
+				    		{
+				    			e.printStackTrace();
+				    		}
+				    	}
+				    });
 				}
 
 				//I sold stocks
@@ -137,17 +152,7 @@ public class ConnectionToPlayer implements Runnable
 					
 				}
 			    
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+	
 			
 			}
 			
