@@ -58,12 +58,12 @@ public class ConnectionToPlayer implements Runnable
 	public ConnectionToPlayer(String ip, final String opponent, final String currency, final String time)
 	{
 		this.opponent = opponent;
-		//needs to get port, uses the server port + 1
+	
 		SettingsDataHandler sdh = new SettingsDataHandler();
 		ArrayList<String> getPortArrayList = sdh.getSettings();
-		int temp = Integer.parseInt(getPortArrayList.get(1));
-	    int port = temp+1;
 		
+	    int port = Integer.parseInt(getPortArrayList.get(1));
+		System.out.println(port);
 		
 		try {
 			this.socket = new Socket(ip, port);

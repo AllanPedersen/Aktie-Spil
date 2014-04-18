@@ -32,9 +32,7 @@ public class CreateGameHost implements Runnable
 	{
       ArrayList<String> userSettings = new ArrayList<String>();
 		userSettings = sdh.getSettings();
-		int temp = Integer.parseInt(userSettings.get(1));
-	    this.port = temp+1;
-      
+		 this.port = Integer.parseInt(userSettings.get(1));
       
       Thread connectorThread = new Thread(this); //adds itself to a thread
       connectorThread.start(); //starts run() as a new thread.
