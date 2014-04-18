@@ -2,6 +2,8 @@ package logic;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Bank {
 	
 	private double amount;
@@ -33,7 +35,7 @@ public class Bank {
 	 */
 	public boolean buyStock(Stock stock, int amount) {
 		if (amount < 0) {
-			System.out.println("LOG: Tried to buy negative number of stocks: amount = " + amount);
+			JOptionPane.showMessageDialog(null, "Du kan ikke foretage en handel med et negativt nummer", "Antal ikke tilladt", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		
@@ -46,6 +48,7 @@ public class Bank {
 					if (st.equals(stock)) {
 						st.setBankAmount(st.getBankAmount() + amount);
 						st.setBoughtValue(stock.getValue());
+						break;
 					}
 				}
 			} else {
@@ -57,11 +60,9 @@ public class Bank {
 			
 			// Update bank amount
 			this.amount = this.amount - totalCost;
-			
-			System.out.println("LOG: Bought " + amount + " of stock for a combined value of: " + totalCost);
 			return true;
 		} else {
-			System.out.println("LOG: Total cost of stocks exceed amount in bank: bank = " + this.amount);
+			JOptionPane.showMessageDialog(null, "Du har ikke nok penge til at foretage handlen", "Ikke nok penge", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		
@@ -79,7 +80,7 @@ public class Bank {
 		for (Stock st : stocks) {
 			if (st.equals(stock)) {
 				// Check if amount is less than or equal to what we have.
-				if (st.getBankAmount() <= amount) {
+				if (st.getBankAmount() >= amount) {
 					// Update stock value
 					st.updateValue();
 					
@@ -92,6 +93,7 @@ public class Bank {
 					// Remove stocks from list
 					st.setBankAmount(st.getBankAmount() - amount);
 				} else {
+					JOptionPane.showMessageDialog(null, "Du kan ikke foretage en handel med flere aktier end du ejer.", "Antal ikke tilladt", JOptionPane.WARNING_MESSAGE);
 					return false;
 				}
 				

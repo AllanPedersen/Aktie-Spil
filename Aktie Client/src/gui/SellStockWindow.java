@@ -8,6 +8,8 @@ import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import logic.Bank;
@@ -15,7 +17,7 @@ import logic.Stock;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class SellStockWindow extends JFrame implements MouseListener {
+public class SellStockWindow extends JFrame implements MouseListener, KeyListener {
 
 	/**
 	 * 
@@ -25,11 +27,15 @@ public class SellStockWindow extends JFrame implements MouseListener {
 	private JTextField amount;
 	private Stock stock;
 	private Bank bank;
+	private StockPanel stPanel;
+	private JLabel lblSaldo;
 
 	public SellStockWindow(Stock stock, StockPanel stPan) {
 		super();
 		this.stock = stock;
+		this.stock.updateValue();
 		this.bank = Bank.getInstance();
+		this.stPanel = stPan;
 		this.setResizable(false);
 		this.setSize(444, 357);
 		this.setLocationRelativeTo(null);
@@ -91,7 +97,7 @@ public class SellStockWindow extends JFrame implements MouseListener {
 		lblKurs.setBounds(16, 47, 47, 16);
 		panel_1.add(lblKurs);
 		
-		JLabel lblSaldo = new JLabel("Du f\u00E5r US $ XXX for at s\u00E6lge YY af denne aktie");
+		lblSaldo = new JLabel("");
 		lblSaldo.setForeground(Color.GRAY);
 		lblSaldo.setBounds(16, 155, 411, 16);
 		panel_1.add(lblSaldo);
@@ -106,6 +112,7 @@ public class SellStockWindow extends JFrame implements MouseListener {
 		panel_1.add(lblStk);
 		
 		amount = new JTextField();
+		amount.addKeyListener(this);
 		amount.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		amount.setHorizontalAlignment(SwingConstants.CENTER);
 		amount.setText("0");
@@ -116,12 +123,16 @@ public class SellStockWindow extends JFrame implements MouseListener {
 		this.setVisible(true);
 		toFront();
 	}
+	
+	public void sell() {
+		bank.sellStock(stock, Integer.parseInt(amount.getText()));
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnSell) {
-		
-			//StockPanel.updateView();
+			sell();
+			stPanel.updateView();
 			this.dispose();
 		}
 		if (e.getSource() == btnCancel) {
@@ -156,6 +167,33 @@ public class SellStockWindow extends JFrame implements MouseListener {
 		}
 		if (e.getSource() == this.btnCancel) {
 			btnCancel.setBackground(ClientWindow.red);
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == amount) {
+			int amountField = 0;
+			try {
+				amountField = Integer.parseInt(amount.getText());
+			} catch (Exception e2) {
+			}
+			double val = this.stock.getValue();
+			double total = amountField * val;
+			if (amountField > this.stock.getBankAmount()) {
+				lblSaldo.setText("Du kan max saelge " + this.stock.getBankAmount() + " af denne aktie.");
+			} else {
+				lblSaldo.setText("Du f\u00E5r US $"+Math.round(total)+" for at s\u00E6lge " + amountField + " af denne aktie");
+			}
 		}
 	}
 }

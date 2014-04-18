@@ -187,6 +187,13 @@ public class StockPanel extends JPanel implements MouseListener {
 	}
 
 	public void updateView() {
+		// If stock is bought set hasStock
+		if (selectedStock.getBankAmount() > 0) {
+			hasStock = true;
+		} else {
+			hasStock = false;
+		}
+		
 		lblPridForAktie.setText("Pris for aktie: ");
 
 		// Set name of stock
@@ -240,7 +247,6 @@ public class StockPanel extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnBuy) {
 			// Open buy panel with the selected stock
-			System.out.println("Buy stock: " + selectedStock.getName());
 			new BuyStockWindow(selectedStock, this);
 		}
 
@@ -248,7 +254,6 @@ public class StockPanel extends JPanel implements MouseListener {
 			// Make sure stock is purchased
 			if (hasStock) {
 				// Open sell panel with selected stock
-				System.out.println("Sell stock: " + selectedStock.getName());
 				new SellStockWindow(selectedStock, this);
 			}
 		}
@@ -261,14 +266,6 @@ public class StockPanel extends JPanel implements MouseListener {
 
 				// Set as selected stock
 				selectedStock = selected;
-				System.out.println(selectedStock.getName());
-
-				// If stock is bought set hasStock
-				if (selected.getBankAmount() > 0) {
-					hasStock = true;
-				} else {
-					hasStock = false;
-				}
 
 				// Update the view
 				updateView();
