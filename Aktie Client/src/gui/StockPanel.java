@@ -173,6 +173,9 @@ public class StockPanel extends JPanel implements MouseListener {
 		
 		// TODO Set timer..
 		lblTime.setText(time);
+		
+		// Update window
+		this.updateView();
 	}
 
 	public void setStockList(ArrayList<Stock> stocks) {
