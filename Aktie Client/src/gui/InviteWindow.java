@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import logic.ConnectionToPlayer;
 import logic.Player;
 import logic.ServerConnector;
 
@@ -25,14 +26,20 @@ public class InviteWindow extends JFrame implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel lblMoney, lblTime, lblSpillernavn;
+	private JLabel lblMoney, lblTime, lblSpillernavn, lblAccepter;
 	private JPanel btnAccept, btnIgnore;
 	private Player player;
+	private String time;
+	private String ip;
+	private String currency;
 	private ServerConnector sc;
 	private String playerInviting;
 
-	public InviteWindow(String playerInviting, String time, String currency, ServerConnector sc) {
+	public InviteWindow(String ip, String playerInviting, String time, String currency, ServerConnector sc) {
 		super();
+		this.ip = ip;
+		this.time = time;
+		this.currency = currency;
 		this.playerInviting = playerInviting;
 		this.sc = sc;
 		this.setResizable(false);
@@ -91,7 +98,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		btnAccept.setBounds(16, 135, 188, 39);
 		panel_1.add(btnAccept);
 
-		JLabel lblAccepter = new JLabel("Accepter");
+		this.lblAccepter = new JLabel("Accepter");
 		btnAccept.add(lblAccepter);
 
 		btnIgnore = new JPanel();
@@ -116,10 +123,17 @@ public class InviteWindow extends JFrame implements MouseListener {
 		// TODO: Notify gameserver of decission
 		sc.acceptInvitation(playerInviting);
 		// Change main window view to gamepanel
-		ClientWindow.changeLayout("Game");
-		
-		// Close popup window
+		lblAccepter.setText("Venter på at forbinde til Server!");
+		sc.removeMeFromServer();//tells server to be removed from game lobby
+		try {
+			wait(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		new ConnectionToPlayer(ip, playerInviting, currency, time);
 		this.dispose();
+		
 	}
 
 	/**

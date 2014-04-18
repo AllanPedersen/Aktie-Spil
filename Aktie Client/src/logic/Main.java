@@ -22,7 +22,7 @@ public class Main {
 			    	{
 			    		try
 			    		{
-			    			Bank.instantiateBank(1000000);
+			    			
 			    			clientWindow = new ClientWindow();
 			    			// TODO Remove and instanciate from server
 			    		}

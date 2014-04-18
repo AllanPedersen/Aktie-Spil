@@ -88,7 +88,7 @@ public class ServerConnector implements Runnable
 					 SwingUtilities.invokeLater(new Runnable() {
 							public void run() 
 							{
-								new InviteWindow(divideString[2], divideString[3], divideString[4], ServerConnector.this);
+								new InviteWindow(divideString[1], divideString[2], divideString[3], divideString[4], ServerConnector.this);
 							}
 				    	});
 				    }
@@ -116,7 +116,7 @@ public class ServerConnector implements Runnable
 								} catch (IOException e) {
 				
 								}
-								
+								new CreateGameHost(sdh);
 							}
 				    	});
 					 

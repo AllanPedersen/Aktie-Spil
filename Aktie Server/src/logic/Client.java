@@ -21,7 +21,7 @@ public class Client implements Runnable {
 	
 	public Client(Socket clientSocket, UserDataHandler udh)
 	{
-		this.clientSocket = clientSocket;
+	   this.clientSocket = clientSocket;
 	   this.udh = udh;
 	   
 	   try {
