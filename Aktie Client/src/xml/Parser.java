@@ -30,8 +30,6 @@ public class Parser {
 		url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"
 				+ url + "%22)&env=store://datatables.org/alltableswithkeys";
 
-		System.out.println(url);
-
 		ArrayList<Stock> stcks = new ArrayList<Stock>();
 
 		// Fetch XML and parse into objects
