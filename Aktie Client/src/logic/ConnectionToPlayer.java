@@ -49,7 +49,8 @@ public class ConnectionToPlayer implements Runnable
 		}		
 		establishIO();
 		
-		ClientWindow.this.gamePanel.startGame(currency, time);
+		
+		Main.clientWindow.gamePanel.startGame(currency, time);
 		ClientWindow.changeLayout("Game");
 	}
 
