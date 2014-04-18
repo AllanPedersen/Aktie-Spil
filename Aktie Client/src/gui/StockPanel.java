@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Cursor;
@@ -13,6 +14,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import xml.Parser;
 import logic.Bank;
 import logic.Stock;
 
@@ -37,7 +39,6 @@ public class StockPanel extends JPanel implements MouseListener {
 	 */
 	public StockPanel() {
 		this.setSize(800, 600);
-		bank = Bank.getInstance();
 		setLayout(null);
 
 		JPanel panel_2 = new JPanel();
@@ -49,7 +50,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblDig = new JLabel("Dig:");
 		panel_2.add(lblDig);
 
-		lblYourMoney = new JLabel("$" + bank.getAmount());
+		lblYourMoney = new JLabel();
 		lblYourMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_2.add(lblYourMoney);
 
@@ -62,7 +63,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblModstander = new JLabel("Modstander:");
 		panel_3.add(lblModstander);
 
-		lblOpponentMoney = new JLabel("$87.000 US");
+		lblOpponentMoney = new JLabel();
 		lblOpponentMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_3.add(lblOpponentMoney);
 
@@ -75,7 +76,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblTidTilbage = new JLabel("Tid tilbage:");
 		panel_4.add(lblTidTilbage);
 
-		lblTime = new JLabel("1 time 13 min");
+		lblTime = new JLabel("1 time 00 min");
 		lblTime.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_4.add(lblTime);
 
@@ -122,13 +123,6 @@ public class StockPanel extends JPanel implements MouseListener {
 		btnSell = new JPanel();
 		btnSell.addMouseListener(this);
 
-		// If person hasn't got stock set color to gray
-		if (hasStock) {
-			btnSell.setBackground(ClientWindow.red);
-		} else {
-			btnSell.setBackground(Color.GRAY);
-		}
-
 		FlowLayout fl_btnSell = (FlowLayout) btnSell.getLayout();
 		fl_btnSell.setVgap(13);
 		btnSell.setBounds(520, 455, 226, 41);
@@ -145,7 +139,6 @@ public class StockPanel extends JPanel implements MouseListener {
 		lblStockPrice.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblStockPrice.setBounds(382, 68, 96, 16);
 		all.add(lblStockPrice);
-
 
 		lblDuEjerX = new JLabel();
 		lblDuEjerX.setBounds(285, 105, 461, 16);
@@ -166,12 +159,13 @@ public class StockPanel extends JPanel implements MouseListener {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(6, 48, 788, 12);
 		add(separator);
-
-		// Set values of selected Stock
-		if (selectedStock != null) {
-			lblStockName.setText(selectedStock.getName());
-			lblStockPrice.setText(Double.toString(selectedStock.getValue()));
-		}
+	}
+	
+	public void startGame(int amount, int time) {
+		Bank.instantiateBank(amount);
+		bank = Bank.getInstance();
+		this.setStockList(Parser.getAllStocks());
+		this.setOpponentMoney(amount);
 	}
 
 	public void setStockList(ArrayList<Stock> stocks) {
@@ -184,6 +178,14 @@ public class StockPanel extends JPanel implements MouseListener {
 				listModel.addElement(stock.getName());
 			}
 		}
+	}
+	
+	public void setOpponentMoney(double money) {
+		lblOpponentMoney.setText("$" + Math.round(money));
+	}
+	
+	public void setTime(String time) {
+		lblTime.setText(time);
 	}
 
 	public void updateView() {

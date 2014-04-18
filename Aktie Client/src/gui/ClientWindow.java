@@ -2,14 +2,12 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import xml.Parser;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import logic.ServerConnector;
 import logic.SettingsDataHandler;
-import logic.Stock;
 
 public class ClientWindow extends JFrame {
 	
@@ -75,12 +73,7 @@ public class ClientWindow extends JFrame {
 		lobby.setServerStatus(1);
 		lobby.setUsername(settings.get(2));
 		
-		
 		gamePanel = new StockPanel();
-		
-		ArrayList<Stock> stocks = Parser.getAllStocks();
-		
-		gamePanel.setStockList(stocks);
 
 		cl = new CardLayout();
 		cards = new JPanel(cl);
@@ -90,7 +83,7 @@ public class ClientWindow extends JFrame {
 		contentPane.add(cards);
 		
 		// Show the default layout
-		cl.show(cards, "Lobby");
+		cl.show(cards, "Game");
 		
 		// Lock window size and set visible
 		this.setResizable(false);
@@ -98,10 +91,6 @@ public class ClientWindow extends JFrame {
 	}
 	
 	public static void changeLayout(String layout) {
-		// TODO: Check if specified layout exists
-		// TODO: Change layout or throw exception
 		cl.show(cards, layout);
 	}
-
-
 }

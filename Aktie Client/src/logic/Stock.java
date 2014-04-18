@@ -38,6 +38,7 @@ public class Stock {
 		// If value is more than 5 mins old then update.
 		long newTime = new Date().getTime();
 		if ((newTime - timestamp) > (5*60*1000)) {
+			System.out.println("Updates value for " + this.getName() + " - Old time: " + timestamp + " New time: " + newTime);
 			this.updateValue();
 			this.timestamp = newTime;
 		}
