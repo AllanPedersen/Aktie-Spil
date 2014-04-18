@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class ConnectionToPlayer implements Runnable 
 { 
@@ -16,6 +17,8 @@ public class ConnectionToPlayer implements Runnable
 	private PrintWriter sendToOther;
 	private Scanner readingFromOther;
 	private String textFromOther;
+	private String currency;
+	private String time;
 	/**
 	 * Server Edition
 	 * @param clientSocket
@@ -30,10 +33,8 @@ public class ConnectionToPlayer implements Runnable
 	 * @param ip
 	 * @param port
 	 */
-	public ConnectionToPlayer(String ip, String playerInviting, String currency, String time)
+	public ConnectionToPlayer(String ip, String playerInviting, final String currency, final String time)
 	{
-		
-		
 		//needs to get port, uses the serverport + 1
 		String port;
 		SettingsDataHandler sdh = new SettingsDataHandler();
@@ -49,9 +50,21 @@ public class ConnectionToPlayer implements Runnable
 		}		
 		establishIO();
 		
-		
-		Main.clientWindow.gamePanel.startGame(currency, time);
-		ClientWindow.changeLayout("Game");
+				SwingUtilities.invokeLater(new Runnable()
+					{
+					public void run()
+					{
+						try
+						{
+								Main.clientWindow.gamePanel.startGame(currency, time);
+								ClientWindow.changeLayout("Game");
+			    		}
+			    		catch(Exception e)
+			    		{
+			    			e.printStackTrace();
+			    		}
+			    	}
+			    });
 	}
 
 	
