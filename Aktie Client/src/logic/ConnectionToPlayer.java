@@ -104,9 +104,7 @@ public class ConnectionToPlayer implements Runnable
 			}  
 		  catch (IOException e) {
 				e.printStackTrace();
-			}		
-		  this.sendToOther.println("hello");
-		  this.sendToOther.flush();
+			}	
 		  new Thread(this).start(); //starts the new Thread
 	
 	}
@@ -119,8 +117,9 @@ public class ConnectionToPlayer implements Runnable
 			if(this.readingFromOther.hasNextLine())
 			{
 				this.textFromOther = this.readingFromOther.nextLine();
-			    System.out.println(this.textFromOther);
-				//I bought stocks
+				
+				
+				
 				if(textFromOther.startsWith("bs"))
 				{
 					
