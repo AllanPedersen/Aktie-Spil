@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import logic.Player;
+import logic.ServerConnector;
 
 public class InviteWindow extends JFrame implements MouseListener {
 
@@ -27,9 +28,13 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private JLabel lblMoney, lblTime, lblSpillernavn;
 	private JPanel btnAccept, btnIgnore;
 	private Player player;
+	private ServerConnector sc;
+	private String playerInviting;
 
-	public InviteWindow(String player, String time, String currency) {
+	public InviteWindow(String playerInviting, String time, String currency, ServerConnector sc) {
 		super();
+		this.playerInviting = playerInviting;
+		this.sc = sc;
 		this.setResizable(false);
 		this.setSize(444, 266);
 		this.setLocationRelativeTo(null);
@@ -55,7 +60,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		lblDuErBlevet.setBounds(16, 16, 212, 16);
 		panel_1.add(lblDuErBlevet);
 
-		lblSpillernavn = new JLabel(player);
+		lblSpillernavn = new JLabel(playerInviting);
 		lblSpillernavn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblSpillernavn.setBounds(240, 16, 198, 16);
 		panel_1.add(lblSpillernavn);
@@ -150,10 +155,12 @@ public class InviteWindow extends JFrame implements MouseListener {
 		if (e.getSource() == this.btnAccept) {
 			btnAccept.setBackground(ClientWindow.hoverGreen);
 			btnAccept.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			sc.acceptInvitation(playerInviting);
 		}
 		if (e.getSource() == this.btnIgnore) {
 			btnIgnore.setBackground(ClientWindow.hoverRed);
 			btnIgnore.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			sc.denyInvitation(playerInviting);
 		}
 	}
 

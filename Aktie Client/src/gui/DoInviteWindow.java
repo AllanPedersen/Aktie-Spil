@@ -115,7 +115,7 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnInvite) {
 			btnInvite.setBackground(Color.gray);
-			sc.inviteUser(player.getName(), this.money.getSelectedItem().toString(), this.time.getSelectedItem().toString());
+			sc.inviteUser(player.getName(), this.money.getSelectedItem().toString(), this.time.getSelectedItem().toString(),this);
 			lblInviterSpilelr.setText(btnTextWaitForPlayer);
 			waiting = true;
 		}

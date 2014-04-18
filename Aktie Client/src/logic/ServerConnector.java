@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import gui.ClientWindow;
+import gui.DoInviteWindow;
 import gui.InviteWindow;
 
 public class ServerConnector implements Runnable
@@ -21,6 +23,8 @@ public class ServerConnector implements Runnable
 	private String ip;
 	private String port;
 	private String email;
+	
+	private DoInviteWindow doInvitWindow;
 	
 	
     private Socket socket;
@@ -84,14 +88,52 @@ public class ServerConnector implements Runnable
 					 SwingUtilities.invokeLater(new Runnable() {
 							public void run() 
 							{
-								System.out.println("TEST");
-								new InviteWindow(divideString[2], divideString[3], divideString[4]);
-								
+								new InviteWindow(divideString[2], divideString[3], divideString[4], ServerConnector.this);
 							}
 				    	});
 				    }
 				 
+				 //a user has accepted invitation
+				 if(this.textFromServer.startsWith("ai"))
+				    {
+					 final String[] divideString = this.textFromServer.split(","); 
+					 SwingUtilities.invokeLater(new Runnable() {
+							public void run() 
+							{
+								doInvitWindow.dispose();
+							    //change Main Window!
+								System.out.println("ACCEPTED!");
+								
+								removeMeFromServer();
+								try {
+									socket.getOutputStream().close();
+									socket.getInputStream().close();
+									socket.getOutputStream().equals(null);
+									socket.getInputStream().equals(null);
+								    socket = null;
+								} catch (IOException e) {
 				
+								}
+								
+							}
+				    	});
+					 
+				    }
+				 
+				 //a user has denied invitation
+				 if(this.textFromServer.startsWith("di"))
+				    {
+					 final String[] divideString = this.textFromServer.split(","); 
+					 SwingUtilities.invokeLater(new Runnable() {
+							public void run() 
+							{
+								doInvitWindow.dispose();
+								System.out.println("Denied!");
+								//game needs to start here
+							}
+				    	});
+					 
+				    }
 			}	    
 		}
 		
@@ -155,13 +197,38 @@ public class ServerConnector implements Runnable
 	/**
 	 * used to invite a player
 	 * uses the ip as a header
+	 * @param doInviteWindow 
 	 * @param user
 	 */
-	public void inviteUser(String playerToInvite, String currency, String time)
+	public void inviteUser(String playerToInvite, String currency, String time, DoInviteWindow doInviteWindow)
 	{
+		doInviteWindow = doInviteWindow; // need to keep this reference to accept or deny invitation
 		String message;
 		message = "ip," + playerToInvite + "," + time + "," + currency;
 		sendToServer.println(message);
 	    sendToServer.flush();
+	}
+
+	/**
+	 * accepts an invitation through the server
+	 * @param player
+	 */
+	public void acceptInvitation(String player) {
+		
+	    String message = "ai," + player;
+		sendToServer.println(message);
+	    sendToServer.flush();
+		
+	}
+
+	/**
+	 * denies an invitation through the server
+	 * @param player
+	 */
+	public void denyInvitation(String player) {
+		String message = "di," + player;
+		sendToServer.println(message);
+	    sendToServer.flush();
+		
 	}
 }

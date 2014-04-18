@@ -18,10 +18,10 @@ public class Client implements Runnable {
 	public String email = "";
 	public String port = "";
 	public String ip = "";
-
+	
 	public Client(Socket clientSocket, UserDataHandler udh)
 	{
-	   this.clientSocket = clientSocket;
+		this.clientSocket = clientSocket;
 	   this.udh = udh;
 	   
 	   try {
@@ -74,10 +74,16 @@ public class Client implements Runnable {
 				{
 					String[] divideChatString = this.fromClient_String.split(",", 2);
 					 //Disregards the [0] position which contains the header 'ai'
-					udh.acceptInvitation(ip, name, divideChatString[1]); //accepts invitation
-						
-					
+					udh.acceptInvitation(name, divideChatString[1]); //accepts invitation		
 				}
+				
+				if(this.fromClient_String.startsWith("di"))
+				{
+					String[] divideChatString = this.fromClient_String.split(",", 2);
+					 //Disregards the [0] position which contains the header 'di'
+					udh.denyInvitation(name, divideChatString[1]); //denies invitation		
+				}
+				
 				
 				//user closed his application
 				if(this.fromClient_String.startsWith("x"))
