@@ -17,7 +17,7 @@ public class CreateGameHost implements Runnable
 	private Socket clientSocket;
 	private boolean status;
 	
-	private String port;
+	private int port;
 	
 	private String currency;
 	private String time;
@@ -32,7 +32,7 @@ public class CreateGameHost implements Runnable
 	{
       ArrayList<String> userSettings = new ArrayList<String>();
 		userSettings = sdh.getSettings();
-	    this.port = userSettings.get(1);
+	    this.port = Integer.parseInt(userSettings.get(1)+1);
       
       
       Thread connectorThread = new Thread(this); //adds itself to a thread
@@ -44,7 +44,7 @@ public class CreateGameHost implements Runnable
     public void run() 
 	{
 		try {
-			ss = new ServerSocket(Integer.parseInt(this.port)); //creates the ServerSocket that users are suppose to connector to
+			ss = new ServerSocket(this.port); //creates the ServerSocket that users are suppose to connector to
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
