@@ -162,7 +162,9 @@ public class StockPanel extends JPanel implements MouseListener {
 		add(separator);
 	}
 	
-	public void startGame(int amount, int time) {
+	public void startGame(String amount, String time) {
+		// Parse strings to int and double values.
+		
 		Bank.instantiateBank(amount);
 		bank = Bank.getInstance();
 		this.setStockList(Parser.getAllStocks());
