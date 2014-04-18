@@ -32,7 +32,6 @@ public class ConnectionToPlayer implements Runnable
 			this.opponent = opponent;
 			this.socket = socket;  
 		  
-		  
 		  SwingUtilities.invokeLater(new Runnable()
 			{
 			public void run()
@@ -107,6 +106,7 @@ public class ConnectionToPlayer implements Runnable
 				e.printStackTrace();
 			}		
 		  this.sendToOther.println("hello");
+		  this.sendToOther.flush();
 		  new Thread(this).start(); //starts the new Thread
 	
 	}

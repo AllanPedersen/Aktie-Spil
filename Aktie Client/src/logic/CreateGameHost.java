@@ -30,6 +30,9 @@ public class CreateGameHost implements Runnable
 	 */
 	public CreateGameHost(SettingsDataHandler sdh, String currency, String player, String time)
 	{
+		this.currency = currency;
+		this.time = time;
+		this.player = player;
       ArrayList<String> getPortArrayList = new ArrayList<String>();
       getPortArrayList = sdh.getSettings();
 		int temp = Integer.parseInt(getPortArrayList.get(1));
@@ -60,6 +63,7 @@ public class CreateGameHost implements Runnable
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+	    	System.out.println("2"+currency);
 	        ConnectionToPlayer ctp = new ConnectionToPlayer(clientSocket, time, currency, player); //creates a new client and gives it a socket and reference to ChatDataHandler
 	    	Thread newClientThread = new Thread(ctp);//adds client to a thread
 	    	newClientThread.start(); //Starts the thread

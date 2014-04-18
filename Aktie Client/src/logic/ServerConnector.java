@@ -105,6 +105,7 @@ public class ServerConnector implements Runnable
 							   	//tells server I'm closing
 								removeMeFromServer();
 								
+								new CreateGameHost(sdh, doInvitWindow.selectedCurrency, doInvitWindow.selectedPlayer, doInvitWindow.selectedTime);
 								//closing connection to server
 								try {
 									socket.getOutputStream().close();
@@ -116,7 +117,7 @@ public class ServerConnector implements Runnable
 								} catch (IOException e) {
 				
 								}
-								new CreateGameHost(sdh, doInvitWindow.selectedCurrency, doInvitWindow.selectedPlayer, doInvitWindow.selectedTime);
+								
 							}
 				    	});
 					 
