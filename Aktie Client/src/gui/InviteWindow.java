@@ -126,7 +126,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		lblAccepter.setText("Venter på at forbinde til Server!");
 		sc.removeMeFromServer();//tells server to be removed from game lobby
 		try {
-			wait(5000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
