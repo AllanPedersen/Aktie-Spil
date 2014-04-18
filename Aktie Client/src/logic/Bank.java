@@ -6,10 +6,19 @@ public class Bank {
 	
 	private double amount;
 	private ArrayList<Stock> stocks = new ArrayList<Stock>();
+	private static Bank instance;
 	// TODO: Add fee for buying stocks
 	
-	public Bank(double amount) {
+	private Bank(double amount) {
 		this.amount = amount;
+	}
+	
+	public static void instantiateBank(double amount) {
+		instance = new Bank(amount);
+	}
+	
+	public static Bank getInstance() {
+		return instance;
 	}
 	
 	public double getAmount() {
