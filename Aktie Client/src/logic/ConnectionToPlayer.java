@@ -31,7 +31,7 @@ public class ConnectionToPlayer implements Runnable
 	public ConnectionToPlayer(Socket socket, final String time, final String currency, final String opponent) {
 			this.opponent = opponent;
 			this.socket = socket;  
-		  establishIO();
+		  
 		  
 		  SwingUtilities.invokeLater(new Runnable()
 			{
@@ -48,6 +48,8 @@ public class ConnectionToPlayer implements Runnable
 	    		}
 	    	}
 	    });
+		  
+		  establishIO();
 	}
 
 	/**
@@ -97,20 +99,24 @@ public class ConnectionToPlayer implements Runnable
 		  try {
 				this.sendToOther = new PrintWriter(this.socket.getOutputStream()); //link printWriter to the sockets outputStream
 				this.readingFromOther = new Scanner(this.socket.getInputStream()); //link scanner to the sockets inputStream      
-			} catch (IOException e) {
+			}  
+		  catch (IOException e) {
 				e.printStackTrace();
-			}		  
+			}		
+		  this.sendToOther.println("hello");
 		  new Thread(this).start(); //starts the new Thread
+	
 	}
 
 	public void run() {
+		
 		
 		while(true)
 		{
 			if(this.readingFromOther.hasNextLine())
 			{
 				this.textFromOther = this.readingFromOther.nextLine();
-			
+			    System.out.println(this.textFromOther);
 				//I bought stocks
 				if(textFromOther.startsWith("bs"))
 				{
