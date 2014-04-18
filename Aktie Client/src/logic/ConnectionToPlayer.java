@@ -61,7 +61,8 @@ public class ConnectionToPlayer implements Runnable
 		//needs to get port, uses the server port + 1
 		SettingsDataHandler sdh = new SettingsDataHandler();
 		ArrayList<String> getPortArrayList = sdh.getSettings();
-		int port = Integer.parseInt(getPortArrayList.get(1)+1);
+		int temp = Integer.parseInt(getPortArrayList.get(1));
+	    int port = temp+1;
 		
 		
 		try {
