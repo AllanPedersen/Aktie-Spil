@@ -239,6 +239,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		if (e.getSource() == btnBuy) {
 			// Open buy panel with the selected stock
 			System.out.println("Buy stock: " + this.selectedStock.getName());
+			new BuyStockWindow(this.selectedStock, null);
 		}
 
 		if (e.getSource() == btnSell) {
@@ -246,6 +247,7 @@ public class StockPanel extends JPanel implements MouseListener {
 			if (this.hasStock) {
 				// Open sell panel with selected stock
 				System.out.println("Sell stock: " + this.selectedStock.getName());
+				new SellStockWindow(selectedStock, null);
 			}
 		}
 
