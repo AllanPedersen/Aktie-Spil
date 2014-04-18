@@ -119,8 +119,8 @@ public class ConnectionToPlayer implements Runnable
 				this.textFromOther = this.readingFromOther.nextLine();
 				
 				
-				//I bought stock
-				if(textFromOther.startsWith("bs"))
+				//balance change
+				if(textFromOther.startsWith("bc"))
 				{
 					 final String[] divideChatString = this.textFromOther.split(",", 2); //splits data into a max of 2 values
 					 SwingUtilities.invokeLater(new Runnable()
@@ -146,8 +146,8 @@ public class ConnectionToPlayer implements Runnable
 					
 				}
 				
-				//my balance changed
-				if(textFromOther.startsWith("bc"))
+				//bought stock
+				if(textFromOther.startsWith("bs"))
 				{
 					
 				}

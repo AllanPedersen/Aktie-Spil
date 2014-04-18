@@ -145,6 +145,7 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 		if (e.getSource() == btnBuy) {
 			this.buy();
 			ConnectionToPlayer.sendToOther.println("bs"+","+this.bank.getAmount());
+			ConnectionToPlayer.sendToOther.flush();
 			stPanel.updateView();
 			this.dispose();
 		}
