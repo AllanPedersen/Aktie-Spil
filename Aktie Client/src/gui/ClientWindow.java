@@ -17,7 +17,7 @@ public class ClientWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static JPanel contentPane, cards;
-	private StockPanel gamePanel;
+	public StockPanel gamePanel;
 	private static CardLayout cl;
 	
 	public Lobby lobby;
