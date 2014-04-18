@@ -16,7 +16,7 @@ public class Parser {
 	public static ArrayList<Stock> getAllStocks() {
 		String[] stocks = {"AAPL", "GOOG", "YHOO", "TWTR", "FB", "GS", "CSCO", "MSFT", "JPM", "C", 
 				"GE", "F", "GM", "NOK", "BBRY", "ORCL", "T", "HPQ", "AAL", "FOXA", "JCP", "VZ", "WMT",
-				"MCD", "DIS", "AXP", "BA", "KO"};
+				"MCD", "DIS", "AXP", "BA", "KO", "MU", "AA", "ZNGA", "INTC", "AMD", "SIRI", "PFE", "MS"};
 
 		// Create the URL string with all the above stocks
 		String url = "";
