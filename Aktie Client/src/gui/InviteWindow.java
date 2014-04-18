@@ -114,7 +114,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 	 */
 	private void acceptInvitation() {
 		// TODO: Notify gameserver of decission
-		
+		sc.acceptInvitation(playerInviting);
 		// Change main window view to gamepanel
 		ClientWindow.changeLayout("Game");
 		
@@ -127,7 +127,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 	 */
 	private void declineInvitation() {
 		// TODO: Notify gameserver of decission
-		
+		sc.denyInvitation(playerInviting);
 		// Close popup window
 		this.dispose();
 	}
@@ -155,12 +155,10 @@ public class InviteWindow extends JFrame implements MouseListener {
 		if (e.getSource() == this.btnAccept) {
 			btnAccept.setBackground(ClientWindow.hoverGreen);
 			btnAccept.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			sc.acceptInvitation(playerInviting);
 		}
 		if (e.getSource() == this.btnIgnore) {
 			btnIgnore.setBackground(ClientWindow.hoverRed);
 			btnIgnore.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			sc.denyInvitation(playerInviting);
 		}
 	}
 

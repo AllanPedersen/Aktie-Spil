@@ -101,10 +101,12 @@ public class ServerConnector implements Runnable
 							public void run() 
 							{
 								doInvitWindow.dispose();
-							    //change Main Window!
-								System.out.println("ACCEPTED!");
-								
+							   ClientWindow.changeLayout("Game");
+
+							   	//tells server I'm closing
 								removeMeFromServer();
+								
+								//closing connection to server
 								try {
 									socket.getOutputStream().close();
 									socket.getInputStream().close();
