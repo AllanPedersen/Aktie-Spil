@@ -206,7 +206,14 @@ public class ServerConnector implements Runnable
 	{
 		this.doInvitWindow = doInviteWindow; // need to keep this reference to accept or deny invitation
 		String message;
-		message = "ip," + playerToInvite + "," + time + "," + currency;
+		InetAddress ipAdresse = null;
+		try {
+			ipAdresse = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		message = "ip," + playerToInvite + "," + time + "," + currency + "," + ipAdresse.toString();
 		sendToServer.println(message);
 	    sendToServer.flush();
 	}
