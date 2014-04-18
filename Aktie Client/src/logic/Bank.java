@@ -126,5 +126,22 @@ public class Bank {
 	public ArrayList<Stock> stocksBankContains() {
 		return this.stocks;
 	}
+	
+	/**
+	 * This method sells all remaining stock at the current time.
+	 * The method returns the value of the bank when everything is sold.
+	 * @return double for bank value.
+	 */
+	public double endGame() {
+		for (Stock st : stocks) {			
+			// Calculate 
+			double val = st.getValueNow() * st.getBankAmount();
+			
+			// Update bank amount
+			this.amount = this.amount + val;
+			
+		}
+		return this.amount;
+	}
 
 }
