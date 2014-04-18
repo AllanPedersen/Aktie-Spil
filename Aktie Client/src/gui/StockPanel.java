@@ -173,12 +173,10 @@ public class StockPanel extends JPanel implements MouseListener {
 		bank = Bank.getInstance();
 		this.setStockList(Parser.getAllStocks());
 		this.setOpponentMoney(am);
+		lblYourMoney.setText("$" + am);
 		
 		// TODO Set timer..
 		lblTime.setText(time);
-		
-		// Update window
-		//this.updateView();
 	}
 
 	public void setStockList(ArrayList<Stock> stocks) {
