@@ -101,7 +101,6 @@ public class ServerConnector implements Runnable
 							public void run() 
 							{
 								doInvitWindow.dispose();
-							   ClientWindow.changeLayout("Game");
 
 							   	//tells server I'm closing
 								removeMeFromServer();
@@ -116,7 +115,7 @@ public class ServerConnector implements Runnable
 								} catch (IOException e) {
 				
 								}
-								new CreateGameHost(sdh);
+								new CreateGameHost(sdh, doInvitWindow.selectedCurrency, doInvitWindow.selectedPlayer, doInvitWindow.selectedTime);
 							}
 				    	});
 					 

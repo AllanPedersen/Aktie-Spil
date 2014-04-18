@@ -19,13 +19,35 @@ public class ConnectionToPlayer implements Runnable
 	private String textFromOther;
 	private String currency;
 	private String time;
+	private String opponent;
+	
+	
+	
+	
 	/**
 	 * Server Edition
 	 * @param clientSocket
 	 */
-	public ConnectionToPlayer(Socket socket) {
-		  this.socket = socket;  
+	public ConnectionToPlayer(Socket socket, final String time, final String currency, final String opponent) {
+			this.opponent = opponent;
+			this.socket = socket;  
 		  establishIO();
+		  
+		  SwingUtilities.invokeLater(new Runnable()
+			{
+			public void run()
+			{
+				try
+				{
+						Main.clientWindow.gamePanel.startGame(currency, time, opponent);
+						ClientWindow.changeLayout("Game");
+	    		}
+	    		catch(Exception e)
+	    		{
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    });
 	}
 
 	/**
@@ -33,17 +55,17 @@ public class ConnectionToPlayer implements Runnable
 	 * @param ip
 	 * @param port
 	 */
-	public ConnectionToPlayer(String ip, String playerInviting, final String currency, final String time)
+	public ConnectionToPlayer(String ip, final String opponent, final String currency, final String time)
 	{
-		//needs to get port, uses the serverport + 1
-		String port;
+		this.opponent = opponent;
+		//needs to get port, uses the server port + 1
 		SettingsDataHandler sdh = new SettingsDataHandler();
 		ArrayList<String> getPortArrayList = sdh.getSettings();
-		port = getPortArrayList.get(1);
+		int port = Integer.parseInt(getPortArrayList.get(1)+1);
 		
 		
 		try {
-			this.socket = new Socket(ip, Integer.parseInt(port));
+			this.socket = new Socket(ip, port);
 					} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "error");
 			e.printStackTrace();
@@ -56,7 +78,7 @@ public class ConnectionToPlayer implements Runnable
 					{
 						try
 						{
-								Main.clientWindow.gamePanel.startGame(currency, time);
+								Main.clientWindow.gamePanel.startGame(currency, time, opponent);
 								ClientWindow.changeLayout("Game");
 			    		}
 			    		catch(Exception e)

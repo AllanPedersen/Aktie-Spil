@@ -37,6 +37,9 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	private Player player;
 	private ServerConnector sc;
 	private JComboBox<String> time, money;
+	public String selectedPlayer;
+	public String selectedCurrency;
+	public String selectedTime;
 	/**
 	 * Create the frame.
 	 */
@@ -115,7 +118,10 @@ public class DoInviteWindow extends JFrame implements MouseListener, WindowListe
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnInvite) {
 			btnInvite.setBackground(Color.gray);
-			sc.inviteUser(player.getName(), this.money.getSelectedItem().toString(), this.time.getSelectedItem().toString(),this);
+			selectedCurrency = this.money.getSelectedItem().toString();
+			selectedTime = this.time.getSelectedItem().toString();
+			selectedPlayer = player.getName();
+			sc.inviteUser(selectedPlayer, selectedCurrency, selectedTime,this);
 			lblInviterSpilelr.setText(btnTextWaitForPlayer);
 			waiting = true;
 		}

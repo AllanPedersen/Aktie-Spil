@@ -32,7 +32,7 @@ public class StockPanel extends JPanel implements MouseListener {
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
 	private static Bank bank;
-
+	private JLabel lblModstander;
 
 	/**
 	 * Create the panel.
@@ -60,7 +60,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		panel_3.setBounds(268, 6, 263, 45);
 		add(panel_3);
 
-		JLabel lblModstander = new JLabel("Modstander:");
+		this.lblModstander = new JLabel("");
 		panel_3.add(lblModstander);
 
 		lblOpponentMoney = new JLabel();
@@ -162,7 +162,10 @@ public class StockPanel extends JPanel implements MouseListener {
 		add(separator);
 	}
 	
-	public void startGame(String amount, String time) {
+	public void startGame(String amount, String time, String player) {
+		
+		lblModstander.setText(player);
+		
 		// Parse strings to int and double values.
 		amount = amount.replaceAll("[.]", "");
 		int am = Integer.parseInt(amount);

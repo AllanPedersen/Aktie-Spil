@@ -18,13 +18,17 @@ public class CreateGameHost implements Runnable
 	private boolean status;
 	
 	private String port;
+	
+	private String currency;
+	private String time;
+	private String player;
 
     
 	/**
 	 * Constructor used for starting server, needs  port
 	 * @param port
 	 */
-	public CreateGameHost(SettingsDataHandler sdh)
+	public CreateGameHost(SettingsDataHandler sdh, String currency, String player, String time)
 	{
       ArrayList<String> userSettings = new ArrayList<String>();
 		userSettings = sdh.getSettings();
@@ -56,7 +60,7 @@ public class CreateGameHost implements Runnable
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	        ConnectionToPlayer ctp = new ConnectionToPlayer(clientSocket); //creates a new client and gives it a socket and reference to ChatDataHandler
+	        ConnectionToPlayer ctp = new ConnectionToPlayer(clientSocket, time, currency, player); //creates a new client and gives it a socket and reference to ChatDataHandler
 	    	Thread newClientThread = new Thread(ctp);//adds client to a thread
 	    	newClientThread.start(); //Starts the thread
 	      }
