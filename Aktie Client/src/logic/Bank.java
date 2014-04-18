@@ -40,12 +40,20 @@ public class Bank {
 		double totalCost = stock.getValue() * amount;
 		
 		if (this.getAmount() >= totalCost) {
-			// TODO Check if stock already exists, then add to existing.
-			
-			
-			// Buy stocks
-			stock.setBankAmount(amount);
-			this.stocks.add(stock);
+			// Check if stock already exists, then add to existing.
+			if (this.bankContainsStock(stock)) {
+				for (Stock st : stocks) {
+					if (st.equals(stock)) {
+						st.setBankAmount(st.getBankAmount() + amount);
+						st.setBoughtValue(stock.getValue());
+					}
+				}
+			} else {
+				// Buy stocks
+				stock.setBankAmount(amount);
+				stock.setBoughtValue(stock.getValue());
+				this.stocks.add(stock);
+			}
 			
 			// Update bank amount
 			this.amount = this.amount - totalCost;

@@ -1,22 +1,19 @@
 package gui;
 
 import java.awt.Color;
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-
+import logic.Bank;
 import logic.Stock;
 
 public class StockPanel extends JPanel implements MouseListener {
@@ -25,13 +22,14 @@ public class StockPanel extends JPanel implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel btnBuy, btnSell;
-	private boolean hasStock = false;
-	private Stock selectedStock = null;
+	private static JPanel btnBuy, btnSell;
+	private static boolean hasStock = false;
+	private static Stock selectedStock = null;
 	private ArrayList<Stock> stocks;
-	private JLabel lblStockName, lblStockPrice, lblDuEjerX, lblDuKanKbe, lblAktiensPrisEr, lblHvisDuSlger, lblPridForAktie, lblYourMoney, lblOpponentMoney, lblTime;
+	private static JLabel lblStockName, lblStockPrice, lblDuEjerX, lblDuKanKbe, lblAktiensPrisEr, lblHvisDuSlger, lblPridForAktie, lblYourMoney, lblOpponentMoney, lblTime;
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
+	private static Bank bank;
 
 
 	/**
@@ -39,6 +37,7 @@ public class StockPanel extends JPanel implements MouseListener {
 	 */
 	public StockPanel() {
 		this.setSize(800, 600);
+		bank = Bank.getInstance();
 		setLayout(null);
 
 		JPanel panel_2 = new JPanel();
@@ -50,7 +49,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		JLabel lblDig = new JLabel("Dig:");
 		panel_2.add(lblDig);
 
-		lblYourMoney = new JLabel("$100.000 US");
+		lblYourMoney = new JLabel("$" + bank.getAmount());
 		lblYourMoney.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panel_2.add(lblYourMoney);
 
@@ -124,7 +123,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		btnSell.addMouseListener(this);
 
 		// If person hasn't got stock set color to gray
-		if (this.hasStock) {
+		if (hasStock) {
 			btnSell.setBackground(ClientWindow.red);
 		} else {
 			btnSell.setBackground(Color.GRAY);
@@ -169,9 +168,9 @@ public class StockPanel extends JPanel implements MouseListener {
 		add(separator);
 
 		// Set values of selected Stock
-		if (this.selectedStock != null) {
-			this.lblStockName.setText(this.selectedStock.getName());
-			this.lblStockPrice.setText(Double.toString(this.selectedStock.getValue()));
+		if (selectedStock != null) {
+			lblStockName.setText(selectedStock.getName());
+			lblStockPrice.setText(Double.toString(selectedStock.getValue()));
 		}
 	}
 
@@ -191,36 +190,36 @@ public class StockPanel extends JPanel implements MouseListener {
 		lblPridForAktie.setText("Pris for aktie: ");
 
 		// Set name of stock
-		lblStockName.setText(this.selectedStock.getName());
+		lblStockName.setText(selectedStock.getName());
 
 		// Set value of stock
-		lblStockPrice.setText("$" + this.selectedStock.getValue());
+		lblStockPrice.setText("$" + selectedStock.getValue());
 
 		// Set number of bought stocks
-		lblDuEjerX.setText("Du ejer "+ this.selectedStock.getBankAmount() +" stk. af denne aktie til en samlet v\u00E6rdi af: $ " + (this.selectedStock.getBankAmount() * this.selectedStock.getValueNow()));
+		lblDuEjerX.setText("Du ejer "+ selectedStock.getBankAmount() +" stk. af denne aktie til en samlet v\u00E6rdi af: $ " + Math.round((selectedStock.getBankAmount() * selectedStock.getValueNow())));
 
 		// Set how many stocks can be bought
 		// TODO Get from info from bank..
-		lblDuKanKbe.setText("Du kan k\u00F8be op til: XX stk. af denne aktie med din nuv\u00E6rende saldo.");
+		lblDuKanKbe.setText("Du kan k\u00F8be op til: " + Math.floor(bank.getAmount() / selectedStock.getValue()) + " stk. af denne aktie med din nuv\u00E6rende saldo.");
 
 		// Check if stock is bought
-		if (this.hasStock) {
-			if (this.selectedStock.getBoughtValue() > this.selectedStock.getValueNow()) {
+		if (hasStock) {
+			if (selectedStock.getBoughtValue() > selectedStock.getValueNow()) {
 				// Lost money
-				lblAktiensPrisEr.setText("Aktiens pris er faldet med $ " + Math.round(Math.abs((this.selectedStock.getBoughtValue() - this.selectedStock.getValueNow()))) + " siden du foretog et k\u00F8b.");
+				lblAktiensPrisEr.setText("Aktiens pris er faldet med $ " + Math.round(Math.abs((selectedStock.getBoughtValue() - selectedStock.getValueNow()))) + " siden du foretog et k\u00F8b.");
 
 				// Calculate loss if everything is sold
-				double loss = Math.abs(((this.selectedStock.getBoughtValue() - this.selectedStock.getValueNow()) * this.selectedStock.getBankAmount()));
+				double loss = Math.abs(((selectedStock.getBoughtValue() - selectedStock.getValueNow()) * selectedStock.getBankAmount()));
 
 				lblHvisDuSlger.setText("Hvis du s\u00E6lger alle aktierne nu, vil du tabe $ " + Math.round(loss));
 			} else {
 				// Gained money
-				lblAktiensPrisEr.setText("Aktiens pris er steget med $ " + Math.round((this.selectedStock.getBoughtValue() - this.selectedStock.getValueNow())) + " siden du foretog et k\u00F8b.");
+				lblAktiensPrisEr.setText("Aktiens pris er steget med $ " + Math.abs(Math.round((selectedStock.getBoughtValue() - selectedStock.getValueNow()))) + " siden du foretog et k\u00F8b.");
 
 				// Calculate gain if everything is sold
-				double gain = ((this.selectedStock.getBoughtValue() - this.selectedStock.getValueNow()) * this.selectedStock.getBankAmount());
+				double gain = ((selectedStock.getBoughtValue() - selectedStock.getValueNow()) * selectedStock.getBankAmount());
 
-				lblHvisDuSlger.setText("Hvis du s\u00E6lger alle aktierne nu, vil du vinde $ " + Math.round(gain));
+				lblHvisDuSlger.setText("Hvis du s\u00E6lger alle aktierne nu, vil du vinde $ " + Math.abs(Math.round(gain)));
 			}
 
 			btnSell.setBackground(ClientWindow.red);
@@ -232,22 +231,25 @@ public class StockPanel extends JPanel implements MouseListener {
 		}	
 
 		// Update money
+		lblYourMoney.setText("$" + Math.round(bank.getAmount()));
+		
+		this.repaint();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnBuy) {
 			// Open buy panel with the selected stock
-			System.out.println("Buy stock: " + this.selectedStock.getName());
-			new BuyStockWindow(this.selectedStock, null);
+			System.out.println("Buy stock: " + selectedStock.getName());
+			new BuyStockWindow(selectedStock, this);
 		}
 
 		if (e.getSource() == btnSell) {
 			// Make sure stock is purchased
-			if (this.hasStock) {
+			if (hasStock) {
 				// Open sell panel with selected stock
-				System.out.println("Sell stock: " + this.selectedStock.getName());
-				new SellStockWindow(selectedStock, null);
+				System.out.println("Sell stock: " + selectedStock.getName());
+				new SellStockWindow(selectedStock, this);
 			}
 		}
 
@@ -258,18 +260,18 @@ public class StockPanel extends JPanel implements MouseListener {
 				Stock selected = stocks.get(list.getSelectedIndex());
 
 				// Set as selected stock
-				this.selectedStock = selected;
-				System.out.println(this.selectedStock.getName());
+				selectedStock = selected;
+				System.out.println(selectedStock.getName());
 
 				// If stock is bought set hasStock
 				if (selected.getBankAmount() > 0) {
-					this.hasStock = true;
+					hasStock = true;
 				} else {
-					this.hasStock = false;
+					hasStock = false;
 				}
 
 				// Update the view
-				this.updateView();
+				updateView();
 				this.repaint();
 			}
 		}
@@ -290,7 +292,7 @@ public class StockPanel extends JPanel implements MouseListener {
 			btnBuy.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		if (e.getSource() == btnSell) {
-			if (this.hasStock) {
+			if (hasStock) {
 				btnSell.setBackground(ClientWindow.hoverRed);
 				btnSell.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
@@ -303,7 +305,7 @@ public class StockPanel extends JPanel implements MouseListener {
 			btnBuy.setBackground(ClientWindow.green);
 		}
 		if (e.getSource() == btnSell) {
-			if (this.hasStock) {
+			if (hasStock) {
 				btnSell.setBackground(ClientWindow.red);
 			}
 		}

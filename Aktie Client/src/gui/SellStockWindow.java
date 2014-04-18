@@ -1,25 +1,17 @@
 package gui;
 
 import javax.swing.JFrame;
-
 import java.awt.BorderLayout;
-
 import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import logic.Bank;
-import logic.Player;
 import logic.Stock;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
@@ -30,13 +22,14 @@ public class SellStockWindow extends JFrame implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel btnSell, btnCancel;
-	private Player player;
 	private JTextField amount;
 	private Stock stock;
+	private Bank bank;
 
-	public SellStockWindow(Stock stock, Bank bank) {
+	public SellStockWindow(Stock stock, StockPanel stPan) {
 		super();
 		this.stock = stock;
+		this.bank = Bank.getInstance();
 		this.setResizable(false);
 		this.setSize(444, 357);
 		this.setLocationRelativeTo(null);
@@ -128,6 +121,8 @@ public class SellStockWindow extends JFrame implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnSell) {
 		
+			//StockPanel.updateView();
+			this.dispose();
 		}
 		if (e.getSource() == btnCancel) {
 			this.dispose();

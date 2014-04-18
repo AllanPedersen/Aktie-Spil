@@ -85,7 +85,7 @@ public class ClientWindow extends JFrame {
 		cl = new CardLayout();
 		cards = new JPanel(cl);
 		cards.add(lobby, "Lobby");
-		cards.add(gamePanel, "Lobby");
+		cards.add(gamePanel, "Game");
 		
 		contentPane.add(cards);
 		

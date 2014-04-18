@@ -1,25 +1,17 @@
 package gui;
 
 import javax.swing.JFrame;
-
 import java.awt.BorderLayout;
-
 import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import logic.Bank;
-import logic.Player;
 import logic.Stock;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
@@ -30,15 +22,17 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel btnBuy, btnCancel;
-	private Player player;
 	private JTextField amount;
 	private Bank bank;
 	private Stock stock;
+	private StockPanel stPanel;
 
-	public BuyStockWindow(Stock stock, Bank bank) {
+	public BuyStockWindow(Stock stock, StockPanel pan) {
 		super();
-		this.bank = bank;
+		this.bank = Bank.getInstance();
 		this.stock = stock;
+		this.stock.updateValue();
+		this.stPanel = pan;
 		this.setResizable(false);
 		this.setSize(444, 379);
 		this.setLocationRelativeTo(null);
@@ -91,7 +85,7 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 		lblName.setBounds(75, 19, 352, 16);
 		panel_1.add(lblName);
 		
-		JLabel lblAsk = new JLabel("UD $" + this.stock.getValueNow());
+		JLabel lblAsk = new JLabel("UD $" + this.stock.getValue());
 		lblAsk.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblAsk.setBounds(75, 47, 352, 16);
 		panel_1.add(lblAsk);
@@ -100,12 +94,14 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 		lblKurs.setBounds(16, 47, 47, 16);
 		panel_1.add(lblKurs);
 		
-		JLabel lblSaldo = new JLabel("Du har XXX til r\u00E5dighed til k\u00F8b");
+		JLabel lblSaldo = new JLabel("Du har "+ Math.round(this.bank.getAmount()) +" til r\u00E5dighed til k\u00F8b");
 		lblSaldo.setForeground(Color.GRAY);
 		lblSaldo.setBounds(16, 75, 411, 16);
 		panel_1.add(lblSaldo);
 		
-		JLabel lblCanBuy = new JLabel("Du kan k\u00F8be op til XX af denne aktie.");
+		int number = (int) Math.floor(this.bank.getAmount() / this.stock.getValue());
+		
+		JLabel lblCanBuy = new JLabel("Du kan k\u00F8be op til "+number+" af denne aktie.");
 		lblCanBuy.setForeground(Color.GRAY);
 		lblCanBuy.setBounds(16, 93, 411, 16);
 		panel_1.add(lblCanBuy);
@@ -129,12 +125,19 @@ public class BuyStockWindow extends JFrame implements MouseListener {
 
 		this.setVisible(true);
 		toFront();
-	}	
+	}
+	
+	private void buy() {
+		this.bank.buyStock(stock, Integer.parseInt(this.amount.getText()));
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnBuy) {
-			
+			this.buy();
+			System.out.println("BANK SALDO: " + this.bank.getAmount());
+			stPanel.updateView();
+			this.dispose();
 		}
 		if (e.getSource() == btnCancel) {
 			this.dispose();
