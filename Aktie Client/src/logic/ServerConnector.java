@@ -111,7 +111,8 @@ public class ServerConnector implements Runnable
 									socket.getInputStream().close();
 									socket.getOutputStream().equals(null);
 									socket.getInputStream().equals(null);
-								    socket = null;
+								    socket.close();
+									socket = null;
 								} catch (IOException e) {
 				
 								}
@@ -231,5 +232,20 @@ public class ServerConnector implements Runnable
 		sendToServer.println(message);
 	    sendToServer.flush();
 		
+	}
+
+	public void closeConnection() {
+		//closing connection to server
+		try {
+			socket.getOutputStream().close();
+			socket.getInputStream().close();
+			socket.getOutputStream().equals(null);
+			socket.getInputStream().equals(null);
+		    socket.close();
+			socket = null;
+		} catch (IOException e) {
+		
+	}
+
 	}
 }

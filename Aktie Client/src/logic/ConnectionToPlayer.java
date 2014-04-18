@@ -62,9 +62,12 @@ public class ConnectionToPlayer implements Runnable
 		this.opponent = opponent;
 	
 		SettingsDataHandler sdh = new SettingsDataHandler();
-		ArrayList<String> getPortArrayList = sdh.getSettings();
+	
+		 ArrayList<String> getPortArrayList = new ArrayList<String>();
+		getPortArrayList = sdh.getSettings();
 		
-	    int port = Integer.parseInt(getPortArrayList.get(1));
+		int temp = Integer.parseInt(getPortArrayList.get(1));
+		int port = temp+2;
 		System.out.println(port);
 		
 		try {

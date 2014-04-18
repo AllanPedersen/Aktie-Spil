@@ -126,6 +126,7 @@ public class InviteWindow extends JFrame implements MouseListener {
 		// Change main window view to gamepanel
 		
 		sc.removeMeFromServer();//tells server to be removed from game lobby
+		sc.closeConnection();
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -133,7 +134,10 @@ public class InviteWindow extends JFrame implements MouseListener {
 			e.printStackTrace();
 		}
 		new ConnectionToPlayer(ip, playerInviting, currency, time);
+		
+		
 		this.dispose();
+		
 		
 	}
 
