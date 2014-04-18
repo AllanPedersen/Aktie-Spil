@@ -121,6 +121,7 @@ public class StockPanel extends JPanel implements MouseListener {
 		btnBuy.add(lblKbAktie);
 
 		btnSell = new JPanel();
+		btnSell.setBackground(ClientWindow.red);
 		btnSell.addMouseListener(this);
 
 		FlowLayout fl_btnSell = (FlowLayout) btnSell.getLayout();
