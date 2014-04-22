@@ -52,15 +52,15 @@ public class SettingsDataHandler
 			 */
 		} else {
 			this.username = System.getProperty("user.home");
-			File directory = new File(this.username +"/Applications/Aktie Client");
+			File directory = new File(this.username +"/Documents/Aktie Client");
 
 			// if the directory does not exist, create it
 			if (!directory.exists()) 
 			{  directory.mkdir(); 
 			}
 
-			this.storedData = this.username +"/Applications/Aktie Client/settings.txt";
-			this.temporaryData = this.username +"/Applications/Aktie Client/settings2.txt";
+			this.storedData = this.username +"/Documents/Aktie Client/settings.txt";
+			this.temporaryData = this.username +"/Documents/Aktie Client/settings2.txt";
 
 			if(!new File(storedData).exists())
 			{
@@ -73,7 +73,7 @@ public class SettingsDataHandler
 		String storedData;
 		if (Main.IS_MAC) {
 			String username = System.getProperty("user.home");
-			storedData = username +"/Applications/Aktie Client/settings.txt";
+			storedData = username +"/Documents/Aktie Client/settings.txt";
 		} else {
 			String username = System.getProperty("user.name");
 			storedData = "c:\\users\\" + username + "\\appData\\local\\Aktie Client\\settings.txt";
