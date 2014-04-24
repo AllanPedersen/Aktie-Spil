@@ -31,7 +31,6 @@ public class ConnectionToPlayer implements Runnable
 	public ConnectionToPlayer(Socket socket, final String time, final String currency, final String opponent) {
 			this.opponent = opponent;
 			this.socket = socket;  
-			 establishIO();
 		  SwingUtilities.invokeLater(new Runnable()
 			{
 			public void run()
@@ -47,8 +46,7 @@ public class ConnectionToPlayer implements Runnable
 	    		}
 	    	}
 	    });
-		  
-		  establishIO();
+			 establishIO();
 	}
 
 	/**
@@ -67,16 +65,13 @@ public class ConnectionToPlayer implements Runnable
 		
 		int temp = Integer.parseInt(getPortArrayList.get(1));
 		int port = temp+2;
-		System.out.println(port);
 		
 		try {
 			this.socket = new Socket(ip, port);
 					} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "error");
 			e.printStackTrace();
-		}		
-		establishIO();
-		
+		}				
 				SwingUtilities.invokeLater(new Runnable()
 					{
 					public void run()
@@ -92,6 +87,7 @@ public class ConnectionToPlayer implements Runnable
 			    		}
 			    	}
 			    });
+				establishIO();
 	}
 
 	

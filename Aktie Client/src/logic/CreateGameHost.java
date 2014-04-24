@@ -63,10 +63,12 @@ public class CreateGameHost implements Runnable
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	    	System.out.println("2"+currency);
+	    
 	        ConnectionToPlayer ctp = new ConnectionToPlayer(clientSocket, time, currency, player); //creates a new client and gives it a socket and reference to ChatDataHandler
 	    	Thread newClientThread = new Thread(ctp);//adds client to a thread
+	    	changeStatus();
 	    	newClientThread.start(); //Starts the thread
+	    	
 	      }
 		try {
 			ss.close(); //closes the socket so it can be reused again.

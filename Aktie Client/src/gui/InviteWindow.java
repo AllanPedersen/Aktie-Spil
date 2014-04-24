@@ -122,13 +122,14 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private void acceptInvitation() {
 		// TODO: Notify gameserver of decission
 		lblAccepter.setText("Venter på spiller!");
+		lblAccepter.repaint();
 		sc.acceptInvitation(playerInviting);
-		// Change main window view to gamepanel
+		
 		
 		sc.removeMeFromServer();//tells server to be removed from game lobby
 		sc.closeConnection();
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
