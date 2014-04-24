@@ -96,6 +96,7 @@ public class ConnectionToPlayer implements Runnable
 			    	}
 			    });
 				establishIO();
+				new Thread(this).start(); //starts the new Thread
 	}
 
 	
@@ -109,7 +110,6 @@ public class ConnectionToPlayer implements Runnable
 		  catch (IOException e) {
 				e.printStackTrace();
 			}	
-		  new Thread(this).start(); //starts the new Thread
 	
 	}
 
