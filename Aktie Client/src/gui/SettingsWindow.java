@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import logic.Main;
 import logic.SettingsDataHandler;
 
 public class SettingsWindow extends JFrame implements MouseListener {

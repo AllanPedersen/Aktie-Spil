@@ -18,7 +18,6 @@ import java.awt.event.MouseListener;
 
 import logic.Bank;
 import logic.ConnectionToPlayer;
-import logic.ServerConnector;
 import logic.Stock;
 
 import javax.swing.SwingConstants;

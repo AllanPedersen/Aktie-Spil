@@ -17,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import logic.ConnectionToPlayer;
-import logic.Player;
 import logic.ServerConnector;
 
 public class InviteWindow extends JFrame implements MouseListener {
@@ -28,7 +27,6 @@ public class InviteWindow extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblMoney, lblTime, lblSpillernavn, lblAccepter;
 	private JPanel btnAccept, btnIgnore;
-	private Player player;
 	private String time;
 	private String ip;
 	private String currency;

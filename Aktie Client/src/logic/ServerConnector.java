@@ -96,9 +96,10 @@ public class ServerConnector implements Runnable
 				 //a user has accepted invitation
 				 if(this.textFromServer.startsWith("ai"))
 				    {
-					 final String[] divideString = this.textFromServer.split(","); 
-					 SwingUtilities.invokeLater(new Runnable() {
-							public void run() 
+					 final String[] divideString = this.textFromServer.split(",");
+					 System.out.println(divideString[1] + " accepted invitation");
+					 SwingUtilities.invokeLater(new Runnable() {	
+						 public void run() 
 							{
 								doInvitWindow.dispose();
 
@@ -131,8 +132,8 @@ public class ServerConnector implements Runnable
 							public void run() 
 							{
 								doInvitWindow.dispose();
-								System.out.println("Denied!");
-								//game needs to start here
+								System.out.println(divideString[1] + " denied!");
+								//game needs to end here
 							}
 				    	});
 					 
